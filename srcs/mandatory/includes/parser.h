@@ -6,37 +6,47 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 15:03:18 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/22 21:23:19 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
+// # define WIDTH 1920
+// # define HEIGHT 1080
+# define WIDTH 1920
+# define HEIGHT 1080
+
 # include <libft.h>
 # include <stdio.h>
+
 typedef struct	s_vector {
 	double	x;
 	double	y;
 }	t_vector;
+typedef	struct s_darr {
+	double	*arr;
+	size_t	len;
+} t_darr;
 
-
+// typedef	struct	s_rays{
+	
+// 	// size_t		len;
+// } t_rays;
 
 typedef	struct	s_wall {
 	t_vector	*wall;
-	// t_vector	*wallv;
+
 	t_vector	*step;
-	// double	dist;
-	// bool	found_h;
-	// bool	found_v;
+	double		arr_dist[WIDTH];
+	double		arr_angl[WIDTH];
+	t_vector	rays[WIDTH];
+	size_t		len_arr;
+	size_t		rys_len;
+	// size_t	rys_len;
+	
 } t_wall;
-
-
-typedef	struct s_darr {
-	double	*arr;
-	double	*ray_angles;
-	size_t	len;
-} t_darr;
 
 typedef struct s_render {
 	t_vector	*pvec;
@@ -46,7 +56,6 @@ typedef struct s_render {
 	double		rot_angl;
 	double		walk_spd;
 	double		turn_spd;
-	t_darr		*dist;
 	
 	t_wall		*wall;
 }	t_render;
@@ -74,6 +83,7 @@ typedef	struct s_textures {
 typedef struct s_colors {
 	int			ceiling;
 	int			floor;
+	int			clr;
 } t_colors;
 
 
