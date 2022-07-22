@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 21:23:53 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/22 21:57:15 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_map   *init_rndr(t_map *map)
 	/*map->rndr->pvec->y = 1;*/
 	map->rndr->turn_dir = 0;
 	map->rndr->walk_dir = 0;
-	map->rndr->rot_angl = degtorad(90);
+	// map->rndr->rot_angl = degtorad(140);
 	map->rndr->walk_spd = 2;
 	map->rndr->turn_spd = degtorad(10);
 	map->rndr->fov = degtorad(60);

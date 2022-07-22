@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:43:12 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 18:29:09 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/22 22:32:31 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,31 @@ void	draw_player(t_map *map)
 	draw_rect(map, map->rndr->pvec->x, map->rndr->pvec->y, PLY_SIZE, PLY_SIZE);
 }
 
+void	init_angl(t_map *map, char c)
+{
+	if (c == 'N')
+		map->rndr->rot_angl = degtorad(270);
+	if (c == 'W')
+		map->rndr->rot_angl = degtorad(180);
+	if (c == 'S')
+		map->rndr->rot_angl = degtorad(90);
+	if (c == 'E')
+		map->rndr->rot_angl = degtorad(0);
+}
+
+bool	isplayer(char c)
+{
+	if (c == 'N')
+		return (true);
+	if (c == 'E')
+		return (true);
+	if (c == 'S')
+		return (true);
+	if (c == 'W')
+		return (true);
+	return (false);
+}
+
 void	draw_map(t_map *map, int flag) {
 	int	x;
 	int	y;
@@ -81,8 +106,9 @@ void	draw_map(t_map *map, int flag) {
 		x = 0;
 		for (int j = 0; map->map[i][j]; j++)
 		{
-			if (map->map[i][j] == 'N' && !flag)
+			if (isplayer(map->map[i][j]) && !flag)
 			{
+				init_angl(map, map->map[i][j]);
 				p = true;
 				map->rndr->pvec->x = x;
 				map->rndr->pvec->y = y;

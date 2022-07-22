@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 17:08:34 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:34:20 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,50 @@ bool	inside_wall(double x, double y, t_map *map)
 		else if (i == 2)
 			incx -= 4;
 	}
-	return (false); 
-	// check 
-	
+	return (false);
 }
+
+void	move_right(t_map *map)
+{
+	double	x;
+	double	y;
+	int		index_x;
+	int		index_y;
+
+	x = map->rndr->pvec->x + cos(map->rndr->rot_angl + degtorad(90));
+	y = map->rndr->pvec->y + sin(map->rndr->rot_angl + degtorad(90));
+	index_y = x / 16;
+	index_x = y / 16;
+	// printf("here %d %d\n", index_x, index_y);
+	// printf("char is %c\n", map->map[index_x][index_y]);
+	// if (map->map[index_x][index_x] != '1')
+	// {
+	// 	printf("inside\n");
+		map->rndr->pvec->x = x;
+		map->rndr->pvec->y = y;
+	// }
+}
+void	move_left(t_map *map)
+{
+	double	x;
+	double	y;
+	int		index_x;
+	int		index_y;
+
+	x = map->rndr->pvec->x + cos(map->rndr->rot_angl - degtorad(90));
+	y = map->rndr->pvec->y + sin(map->rndr->rot_angl - degtorad(90));
+	index_y = x / 16;
+	index_x = y / 16;
+	// printf("here %d %d\n", index_x, index_y);
+	// printf("char is %c\n", map->map[index_x][index_y]);
+	// if (map->map[index_x][index_x] != '1')
+	// {
+	// 	printf("inside\n");
+		map->rndr->pvec->x = x;
+		map->rndr->pvec->y = y;
+	// }
+}
+
 void	move(t_map *map, int mv)
 {
 	double	tmp;
@@ -65,12 +105,22 @@ void	move(t_map *map, int mv)
 	else if (mv == RIGHT)
 		map->rndr->turn_dir = 1;
 	if (mv == LEFT || mv == RIGHT)
+	{
 		update_ang(map);
-	if (mv == UP)
+	}
+	if (mv == KEY_W)
 		map->rndr->walk_dir = 1;
-	else if (mv == DOWN)
+	else if (mv == KEY_S)
 		map->rndr->walk_dir = -1;
-	if (mv == DOWN || mv == UP)
+	if (mv == KEY_A)
+	{
+		move_left(map);
+	}
+	if (mv == KEY_D)
+	{
+		move_right(map);
+	}
+	if (mv == KEY_S || mv == KEY_W)
 	{
 		if (inside_wall(map->rndr->pvec->x, map->rndr->pvec->y, map))
 			return;

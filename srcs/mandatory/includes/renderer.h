@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 21:14:38 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/22 22:35:54 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@
 #include <limits.h>
 # define SCL_FAC 0.4
 # define CELL_SIZE 16
+
 // # define SPEED 2
 # define PLY_SIZE 4
 # define NUM_RAYS WIDTH / 2
+
 // key codes
-# define UP 13   
-# define DOWN 1 
+# define KEY_W 13   
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
 # define RIGHT 124
 # define LEFT 123
 # define EXIT 53
@@ -71,7 +75,8 @@ void	cast_rays(t_map *map);
 // 3d projection 
 void	project3d(t_map	*map);
 
-
+// normalize ang
+double  normalize_ang(double angle);
 
 // double arr distance 
 t_map  *add_dist(t_map *map, double value, double ray_angl);
