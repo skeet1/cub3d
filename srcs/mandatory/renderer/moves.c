@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 02:07:10 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/22 14:09:22 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	move(t_map *map, int mv)
 	double	tmp;
 
 	tmp = 100;
-	if (mv == RIGHT)
-		map->rndr->turn_dir = 1;
-	else if (mv == LEFT)
+	if (mv == LEFT)
 		map->rndr->turn_dir = -1;
+	else if (mv == RIGHT)
+		map->rndr->turn_dir = 1;
 	if (mv == LEFT || mv == RIGHT)
 		update_ang(map);
 	if (mv == UP)

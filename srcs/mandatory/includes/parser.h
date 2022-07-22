@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 01:09:48 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/22 15:03:18 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef	struct	s_wall {
 
 typedef	struct s_darr {
 	double	*arr;
-	size_t	i;
+	double	*ray_angles;
+	size_t	len;
 } t_darr;
 
 typedef struct s_render {
