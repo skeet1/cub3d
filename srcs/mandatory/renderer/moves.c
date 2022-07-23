@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 23:34:20 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/23 01:37:17 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ bool	inside_wall(double x, double y, t_map *map)
 		if (map->map[index_y][index_x] == '1')
 			return (true);
 		if (i == 0)
-			incx += 4;
+			incx += 1;
 		else if (i == 1)
-			incy += 4;
+			incy += 1;
 		else if (i == 2)
-			incx -= 4;
+			incx -= 1;
 	}
 	return (false);
 }
@@ -63,16 +63,17 @@ void	move_right(t_map *map)
 
 	x = map->rndr->pvec->x + cos(map->rndr->rot_angl + degtorad(90));
 	y = map->rndr->pvec->y + sin(map->rndr->rot_angl + degtorad(90));
-	index_y = x / 16;
-	index_x = y / 16;
-	// printf("here %d %d\n", index_x, index_y);
-	// printf("char is %c\n", map->map[index_x][index_y]);
-	// if (map->map[index_x][index_x] != '1')
-	// {
-	// 	printf("inside\n");
+	index_x = x / 16;
+	index_y = y / 16;
+	printf("x :  %d y : %d\n", index_y, index_x);
+	if (index_x >= (int)map->h)
+		index_x = map->h - 1;
+	if (map->map[index_y][index_x] != '1')
+	{
+		printf("inside\n");
 		map->rndr->pvec->x = x;
 		map->rndr->pvec->y = y;
-	// }
+	}
 }
 void	move_left(t_map *map)
 {
@@ -83,16 +84,18 @@ void	move_left(t_map *map)
 
 	x = map->rndr->pvec->x + cos(map->rndr->rot_angl - degtorad(90));
 	y = map->rndr->pvec->y + sin(map->rndr->rot_angl - degtorad(90));
-	index_y = x / 16;
-	index_x = y / 16;
-	// printf("here %d %d\n", index_x, index_y);
-	// printf("char is %c\n", map->map[index_x][index_y]);
-	// if (map->map[index_x][index_x] != '1')
-	// {
-	// 	printf("inside\n");
+	index_x = x / 16;
+	index_y = y / 16;
+	printf("x:  %d y:  %d\n", index_y, index_x);
+	printf("x :  %d y : %d\n", index_y, index_x);
+	if (index_x >= (int)map->h)
+		index_x = map->h - 1;
+	if (map->map[index_y][index_x] != '1')
+	{
+		printf("inside\n");
 		map->rndr->pvec->x = x;
 		map->rndr->pvec->y = y;
-	// }
+	}
 }
 
 void	move(t_map *map, int mv)

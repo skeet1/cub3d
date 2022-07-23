@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 22:35:54 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/23 01:34:19 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define SCL_FAC 0.4
 # define CELL_SIZE 16
 
-// # define SPEED 2
-# define PLY_SIZE 4
+# define SPEED 2
+# define PLY_SIZE 1
 # define NUM_RAYS WIDTH / 2
 
 // key codes
