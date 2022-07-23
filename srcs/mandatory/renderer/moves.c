@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/23 01:37:17 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/23 10:28:16 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,36 @@ bool	inside_wall(double x, double y, t_map *map)
 		if (map->map[index_y][index_x] == '1')
 			return (true);
 		if (i == 0)
-			incx += 1;
+			incx += 4;
 		else if (i == 1)
-			incy += 1;
+			incy += 4;
 		else if (i == 2)
-			incx -= 1;
+			incx -= 4;
+	}
+	return (false);
+}
+
+bool	inside_wall_lr(double x, double y, t_map *map)
+{
+	x = map->rndr->pvec->x;
+	y = map->rndr->pvec->y;
+	
+	for (int i = 0, incx = 0, incy = 0; i < 4; i++)
+	{
+		x = map->rndr->pvec->x + incx;
+		y = map->rndr->pvec->y + incy;
+
+		int index_x = x / 16;
+		int index_y = y / 16;
+		
+		if (map->map[index_y][index_x] == '1')
+			return (true);
+		if (i == 0)
+			incx += 4;
+		else if (i == 1)
+			incy += 4;
+		else if (i == 2)
+			incx -= 4;
 	}
 	return (false);
 }
@@ -61,19 +86,38 @@ void	move_right(t_map *map)
 	int		index_x;
 	int		index_y;
 
-	x = map->rndr->pvec->x + cos(map->rndr->rot_angl + degtorad(90));
-	y = map->rndr->pvec->y + sin(map->rndr->rot_angl + degtorad(90));
-	index_x = x / 16;
-	index_y = y / 16;
-	printf("x :  %d y : %d\n", index_y, index_x);
-	if (index_x >= (int)map->h)
-		index_x = map->h - 1;
-	if (map->map[index_y][index_x] != '1')
+	// x = map->rndr->pvec->x + cos(map->rndr->rot_angl + degtorad(90));
+	// y = map->rndr->pvec->y + sin(map->rndr->rot_angl + degtorad(90));
+
+	for (int i = 0, incx = 0, incy = 0; i < 4; i++)
 	{
-		printf("inside\n");
-		map->rndr->pvec->x = x;
-		map->rndr->pvec->y = y;
+		x = map->rndr->pvec->x + cos(map->rndr->rot_angl + degtorad(90));
+		y = map->rndr->pvec->y + sin(map->rndr->rot_angl + degtorad(90));
+
+		index_x = (x + incx) / 16;
+		index_y = (y + incy) / 16;
+		
+		if (map->map[index_y][index_x] == '1')
+			return ;
+		if (i == 0)
+			incx += 4;
+		else if (i == 1)
+			incy += 4;
+		else if (i == 2)
+			incx -= 4;
 	}
+
+	map->rndr->pvec->x = x;
+	map->rndr->pvec->y = y;
+	// printf("x :  %d y : %d\n", index_y, index_x);
+	// if (index_x >= (int)map->h)
+	// 	index_x = map->h - 1;
+	// if (map->map[index_y][index_x] != '1')
+	// {
+	// 	printf("inside\n");
+	// 	map->rndr->pvec->x = x;
+	// 	map->rndr->pvec->y = y;
+	// }
 }
 void	move_left(t_map *map)
 {
@@ -82,20 +126,26 @@ void	move_left(t_map *map)
 	int		index_x;
 	int		index_y;
 
-	x = map->rndr->pvec->x + cos(map->rndr->rot_angl - degtorad(90));
-	y = map->rndr->pvec->y + sin(map->rndr->rot_angl - degtorad(90));
-	index_x = x / 16;
-	index_y = y / 16;
-	printf("x:  %d y:  %d\n", index_y, index_x);
-	printf("x :  %d y : %d\n", index_y, index_x);
-	if (index_x >= (int)map->h)
-		index_x = map->h - 1;
-	if (map->map[index_y][index_x] != '1')
+	for (int i = 0, incx = 0, incy = 0; i < 4; i++)
 	{
-		printf("inside\n");
-		map->rndr->pvec->x = x;
-		map->rndr->pvec->y = y;
+		x = map->rndr->pvec->x + cos(map->rndr->rot_angl - degtorad(90));
+		y = map->rndr->pvec->y + sin(map->rndr->rot_angl - degtorad(90));
+
+		index_x = (x + incx) / 16;
+		index_y = (y + incy) / 16;
+		
+		if (map->map[index_y][index_x] == '1')
+			return ;
+		if (i == 0)
+			incx += 4;
+		else if (i == 1)
+			incy += 4;
+		else if (i == 2)
+			incx -= 4;
 	}
+
+	map->rndr->pvec->x = x;
+	map->rndr->pvec->y = y;
 }
 
 void	move(t_map *map, int mv)
