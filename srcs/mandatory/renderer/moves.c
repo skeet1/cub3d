@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/23 11:55:13 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/23 14:23:03 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ bool	possible_x_move(double x, double y, t_map *map)
 		update_one_direction(&y, 0, map);
 		int index_x = x / 16;
 		int index_y = y / 16;
-		
 		// printf("x : %lf , y : %lf , i_x : %d, i_y : %d\n", map->rndr->pvec->x, map->rndr->pvec->y, index_x, index_y);
 		if (map->map[index_y][index_x] == '1')
 			return (true);
@@ -179,30 +178,26 @@ void	move(t_map *map, int mv)
 	else if (mv == KEY_S)
 		map->rndr->walk_dir = -1;
 	if (mv == KEY_A)
-	{
 		move_left(map);
-	}
 	if (mv == KEY_D)
-	{
 		move_right(map);
-	}
-	static int i = 0;
+	// static int i = 0;
 	if (mv == KEY_S || mv == KEY_W)
 	{
 		if (inside_wall(map->rndr->pvec->x, map->rndr->pvec->y, map))
 		{
-			if (possible_y_move(map->rndr->pvec->x, map->rndr->pvec->y, map))
-			{
-				printf("posible move y  %d\n", i++);
-				printf("x: %lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
-				update_one_direction(&map->rndr->pvec->y, 0, map);
-			}
-			else if (possible_x_move(map->rndr->pvec->x, map->rndr->pvec->y, map))
-			{
-				printf("posible move x %d\n", i++);
-				printf("x: %lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
-				update_one_direction(&map->rndr->pvec->x, 1, map);
-			}
+			// if (possible_y_move(map->rndr->pvec->x, map->rndr->pvec->y, map))
+			// {
+			// 	printf("posible move y  %d\n", i++);
+			// 	printf("x: %lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
+			// 	update_one_direction(&map->rndr->pvec->y, 0, map);
+			// }
+			// else if (possible_x_move(map->rndr->pvec->x, map->rndr->pvec->y, map))
+			// {
+			// 	printf("posible move x %d\n", i++);
+			// 	printf("x: %lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
+			// 	update_one_direction(&map->rndr->pvec->x, 1, map);
+			// }
 			return;
 		}
 		else 
@@ -214,7 +209,7 @@ int	move_player(int key_code, t_map *map)
 {
 	move(map, key_code);
 	if (key_code == EXIT)
-		exit_free_if(true, NULL, NULL);
+		red_cross(map);
 	mlx_clear_window(map->mlx->mlx, map->mlx->win);
 	map = new_img(map);
 	draw_map(map, 1);

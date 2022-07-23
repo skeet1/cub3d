@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/23 09:41:10 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/23 14:22:23 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ t_map   *add_ray_coor(t_map *map, double x, double y);
 // draw top the wall 
 void	draw_top_wall(t_map *map, double x, double y, int width, int height);
 void	draw_bottom_wall(t_map *map, double x, double y, int width, int height);
+int	    red_cross(t_map *map);
 
 #endif
