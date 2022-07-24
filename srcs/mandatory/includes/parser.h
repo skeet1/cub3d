@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 21:23:19 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 00:12:52 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ typedef struct	s_vector {
 	double	x;
 	double	y;
 }	t_vector;
+typedef struct	s_v {
+	int	x;
+	int	y;
+}	t_v;
 typedef	struct s_darr {
 	double	*arr;
 	size_t	len;
@@ -37,11 +41,15 @@ typedef	struct s_darr {
 
 typedef	struct	s_wall {
 	t_vector	*wall;
-
+	int		wall_top_pixel;
+	int		wall_height;
 	t_vector	*step;
 	double		arr_dist[WIDTH];
 	double		arr_angl[WIDTH];
 	t_vector	rays[WIDTH];
+	// array of boolean
+	bool		vert[WIDTH];
+	bool		horiz[WIDTH];
 	size_t		len_arr;
 	size_t		rys_len;
 	// size_t	rys_len;
@@ -65,7 +73,7 @@ typedef struct s_mlx {
 	void	*mlx;
 	void	*win;
 	void	*img;
-	char	*img_data;
+	int	*img_data;
 	int		bpp;
 	int		size_line;
 	int		endian;
@@ -73,10 +81,30 @@ typedef struct s_mlx {
 
 // Textures
 typedef	struct s_textures {
+	void			*img_s;
+	void			*img_n;
+	void			*img_e;
+	void			*img_w;
+	
 	char			*north;
 	char			*south;
 	char			*east;
 	char			*west;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	bool 		found_h;
+	bool 		found_v;
+	int				*north_data;
+	int				*south_data;
+	int				*east_data;
+	int				*west_data;
+	int				*data_v;
+	int				*data_h;
+	int				*data;
+	int				w;
+	int				h;
+	t_v		*north_vec;
 } t_textures;
 
 // Colors

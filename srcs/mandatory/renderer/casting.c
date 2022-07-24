@@ -6,53 +6,189 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 21:28:37 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 10:36:19 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <renderer.h>
 
+
 void	draw_column(t_map *map, double x, double y, double wall_proj_height)
 {
-	map->clr->clr = map->clr->ceiling;
-	draw_rect(map, x, 0, 1, 1080 - y);
-	map->clr->clr = 0xffbc9d;
 	draw_rect(map, x, y, 1, wall_proj_height);
-	map->clr->clr = map->clr->floor;
-	draw_rect(map, x, y + wall_proj_height, 1, 1080 - y - wall_proj_height);
 }
 
+void y_drawing(t_map *map, int y0, int y1, int x)
+{
+	
+	// int	pixel;
+	// printf("y0: %d	y1; %d", y0, y1);
+	
+	int	top_pix;
+	// if (top_pix < 0)
+	// 	top_pix = 0;
+	int	i;
+	top_pix = y0;
+	
+	while (y0 < y1)
+	{
+		int  dist_from_top = y0 + (map->rndr->wall->wall_height / 2) - (HEIGHT / 2);
+	
+		int	offy = dist_from_top * ((float)CELL_SIZE / (int)map->rndr->wall->wall_height);
+		int	offset = (offy * CELL_SIZE) + (int)map->txtr->north_vec->x;
+		map->mlx->img_data[(y0 * WIDTH + x)] = map->txtr->north_data[offset];
+		y0 += 1;
+	}
+	
+	i = 0;
+
+	
+}
+double	denormalize_angle(double angle)
+{
+
+	// denormalize angle
+	angle = remainder(angle - M_PI,  2 * M_PI);
+	if (angle < 0)
+		angle += M_PI * 2;
+	
+	return (angle);
+}
+
+void	get_txtr(t_map *map, double ray_angl)
+{
+	// int	i;
+	
+	// i = 0;
+	// while (i < WIDTH)
+	// {
+	ray_angl = denormalize_angle(ray_angl);
+	// denormilizing the angle first to avoid issues with the texture
+	// ray_angl = denormalize_angle(ray_angl);
+		if (!ray_is_down(ray_angl) && ray_is_right(ray_angl))
+		{
+			map->txtr->data_h = map->txtr->south_data;
+			map->txtr->data_v = map->txtr->west_data;
+		}
+		if (!ray_is_down(ray_angl) && !ray_is_right(ray_angl))
+		{
+			map->txtr->data_h = map->txtr->south_data;
+			map->txtr->data_v = map->txtr->east_data;
+		}
+		if (ray_is_down(ray_angl) && ray_is_right(ray_angl))
+		{
+			map->txtr->data_h = map->txtr->north_data;
+			map->txtr->data_v = map->txtr->west_data;
+		}
+		if (ray_is_down(ray_angl) && !ray_is_right(ray_angl))
+		{
+			map->txtr->data_h = map->txtr->north_data;
+			map->txtr->data_v = map->txtr->east_data;
+		}
+		// if (ray_is_down))
+	// if (is_ne(ray_angl))
+	// {
+	// 	// map->txtr->data  = map->txtr->north_data;
+	// 		if (ray_is_down(ray_angl))
+	// 			map->txtr->data_h = map->txtr->north_data;
+	// 		else 
+	// 			map->txtr->data_h = map->txtr->south_data;
+	// 		map->txtr->data_v = map->txtr->west_data;
+	// }
+	// if (is_nw(ray_angl))
+	// {
+	// 		if (ray_is_down(ray_angl))
+	// 			map->txtr->data_h = map->txtr->north_data;
+	// 		else 
+	// 			map->txtr->data_h = map->txtr->south_data;
+	// 		map->txtr->data_v = map->txtr->east_data;
+	// 		// map->txtr->data_h = map->txtr->south_data;
+	// 	// map->txtr->data = map->txtr->west_data;
+
+	// }
+	// if (is_sw(ray_angl))
+	// {
+	// 	// if (map->rndr->wall->vert[i] == true)
+	// 	// map->txtr->data = map->txtr->south_data;
+		
+	// 		map->txtr->data_v = map->txtr->east_data;
+	// 	// // else
+	// 		map->txtr->data_h = map->txtr->north_data;
+	// }
+	//  if (is_se(ray_angl))
+	// {
+	// 	// map->txtr->data = map->txtr->east_data;
+	// 		map->txtr->data_v = map->txtr->west_data;
+	// 		map->txtr->data_h = map->txtr->north_data;
+	
+	// }
+}
 void	project3d(t_map	*map)
 {
 	int	i;
-	double	x;
-	double	y;
-	double	wall_proj_height;
+	// double	x;
+	// double	y;
+	int	botom_pix;
 	double	proj_plan;
-
+	double	wall_proj_height;
+	int	top_pix;
 	i = 0;
-	// for (size_t i =0 ; i < map->rndr->dist->len; i++)
-	// 	printf("dist: %lf\n", map->rndr->dist->arr[i]);	
+		
 	while (i < WIDTH)
 	{
-		// proj_plan = (WIDTH / 2) / tan(map->rndr->fov / 2);
-		proj_plan = ((1920 / 2.00) / tan(map->rndr->fov / 2.00));
+		// get_txtr(map, map->rndr->wall->arr_angl[i]);
+		proj_plan = ((WIDTH / 2) / tan(map->rndr->fov / 2.00));
 		map->rndr->wall->arr_dist[i] *= cos(map->rndr->wall->arr_angl[i] - map->rndr->rot_angl);
-		wall_proj_height = (16 / map->rndr->wall->arr_dist[i]) * proj_plan;
-		x = i * 1;
-		y = (1080 / 2.0) - (wall_proj_height / 2.0);
+		wall_proj_height = (CELL_SIZE / map->rndr->wall->arr_dist[i]) * proj_plan;
+		map->rndr->wall->wall_height = (int)wall_proj_height;
+		top_pix = (int)(HEIGHT / 2) - (int)(wall_proj_height / 2);
+		if (top_pix < 0 || top_pix > HEIGHT)
+			top_pix = 0;
+		botom_pix = (HEIGHT / 2) + (map->rndr->wall->wall_height / 2);
+		if (botom_pix > HEIGHT || botom_pix < 0)
+			botom_pix = HEIGHT;
+		for (int y = 0; y < top_pix; y++)
+		{
+			map->mlx->img_data[(y * WIDTH + i)] = 0x87ceeb;
+			// map->mlx->img_data[(y * WIDTH + i)] = map->clr->ceiling;
+		}
+		int	txtr_x;
+		if (map->rndr->wall->vert[i] == true)
+			txtr_x = (int)map->rndr->wall->rays[i].y % 64;
+		else
+			txtr_x = (int)map->rndr->wall->rays[i].x % 64;
+				
 
-		draw_column(map, x, y, wall_proj_height);
-		// map->clr->clr = map->clr->ceiling;
-		// draw_rect(map, x, 0, 1, 1080 - y);
-		// map->clr->clr = 0xffbc9d;
-		// draw_rect(map, x, y, 1, wall_proj_height);
-		// map->clr->clr = map->clr->floor;
-		// draw_rect(map, x, y + wall_proj_height, 1, 1080 - y - wall_proj_height);
+		// render the wall from top pixel to botom pixel
+			get_txtr(map, map->rndr->wall->arr_angl[i]);
+		for (int y = top_pix; y < botom_pix; y++)
+		{
+			
+			if (map->rndr->wall->vert[i] == true)
+				map->txtr->data = map->txtr->data_v;
+			else
+				map->txtr->data = map->txtr->data_h;
+			int	dist_from_top = y + (map->rndr->wall->wall_height / 2) - (HEIGHT / 2);
+			int	txtr_y = (int)(dist_from_top * ((float)CELL_SIZE / (int)map->rndr->wall->wall_height));
+		
+			
+			map->mlx->img_data[(y * WIDTH + i)] = map->txtr->data[(txtr_y * 64 + txtr_x)];
+		}
+		
+		// set the floor color
+		for (int y = botom_pix; y < HEIGHT; y++)
+		{
+			map->mlx->img_data[(y * WIDTH + i)] = 0x9b7653;
+			// map->mlx->img_data[(y * WIDTH + i)] = map->clr->floor;
+		}
+		
+		//
+	
 		i++;
 	}
-	draw_minimap(map);
-	// draw_rect(map, 100, 0, 100, 500);
+	
+	// draw_minimap(map);
+	
 };
 
 double	get_dist(double x0, double x1, double y0, double y1)
@@ -74,8 +210,13 @@ bool	ray_is_right(double angle)
 	return (false);
 }
 
+
+
 double	normalize_ang(double angle)
 {
+	// angle = (angle + degree) % 360;
+	// if (angle < 0)
+	// 	angle = 360 + angle;
 	angle = remainder(angle, (2 * M_PI));
 	if (angle < 0)
 		angle += (2 * M_PI);
@@ -91,27 +232,26 @@ t_wall	*cast_v(t_map *map, double ray_angl)
 	double	nwall_x;
 	double	nwall_y;
 	t_wall	*tmp;
-	bool	found;
 	double	startx;
 	double	starty;
+	
 	
 	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->step = malloc(sizeof(*tmp->step))), "Error:\n\tmalloc failed\n", map);
-	startx = map->rndr->pvec->x + (4 / 2);
-	starty = map->rndr->pvec->y + (4 / 2);
+	startx = map->rndr->pvec->x + (PLY_SIZE / 2);
+	starty = map->rndr->pvec->y + (PLY_SIZE / 2);
 	
-	found = false;
-	xinter = floor(startx / 16) * 16;
+	xinter = floor(startx / CELL_SIZE) * CELL_SIZE;
 	ray_angl = normalize_ang(ray_angl);
 	if (ray_is_right(ray_angl))
-		xinter += 16;
+		xinter += CELL_SIZE;
 	yinter = starty + (xinter - startx) * tan(ray_angl);
 	
-	tmp->step->x = 16;
+	tmp->step->x = CELL_SIZE;
 	if (!ray_is_right(ray_angl))
 		tmp->step->x *= -1;
-	tmp->step->y = 16 * tan(ray_angl);
+	tmp->step->y = CELL_SIZE * tan(ray_angl);
 	if (!ray_is_down(ray_angl) && tmp->step->y > 0)
 		tmp->step->y *= -1;
 	else if (ray_is_down(ray_angl) && tmp->step->y < 0)
@@ -122,16 +262,16 @@ t_wall	*cast_v(t_map *map, double ray_angl)
 	
 	if (!ray_is_right(ray_angl))
 		nwall_x -= 1;
-	while (nwall_x >= 0 && nwall_x <= (16 * map->w) && nwall_y >= 0 && nwall_y <= (16 * map->h))
+	while (nwall_x >= 0 && nwall_x <= (CELL_SIZE * map->w) && nwall_y >= 0 && nwall_y <= (CELL_SIZE * map->h))
 	{
-		index_x = nwall_x / 16;
-		index_y = nwall_y / 16;
+		index_x = nwall_x / CELL_SIZE;
+		index_y = nwall_y / CELL_SIZE;
 		
 		if (map->map[index_y][index_x] == '1')
 		{
 			if (!ray_is_right(ray_angl))
 				nwall_x += 1;
-			found = true;
+			map->txtr->found_v = true;
 			tmp->wall->x = nwall_x;
 			tmp->wall->y = nwall_y;
 			
@@ -142,7 +282,7 @@ t_wall	*cast_v(t_map *map, double ray_angl)
 			nwall_y += tmp->step->y;
 		}
 	}
-	if (!found)
+	if (!map->txtr->found_v)
 	{
 		tmp->wall->x = __INT_MAX__;
 		tmp->wall->y = __INT_MAX__;
@@ -164,27 +304,24 @@ t_wall	*cast_h(t_map *map, double ray_angl)
 	double	starty;
 
 	t_wall	*tmp;
-	bool	found;
 	
+		
 	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), "Error:\n\tmalloc failed\n", map);
 	exit_free_if(!(tmp->step = malloc(sizeof(*tmp->step))), "Error:\n\tmalloc failed\n", map);
-	startx = map->rndr->pvec->x + 2;
-	starty = map->rndr->pvec->y + 2;
+	startx = map->rndr->pvec->x + (PLY_SIZE / 2);
+	starty = map->rndr->pvec->y + (PLY_SIZE / 2);
 
 	
 	ray_angl = normalize_ang(ray_angl);	
-	found = false;	
-	yinter = floor(starty / 16) * 16;
+	yinter = floor(starty / CELL_SIZE) * CELL_SIZE;
 	if (ray_is_down(ray_angl))
-		yinter += 16;		
-	// xinter = map->rndr->pvec->x + (yinter - map->rndr->pvec->y) / tan(ray_angl);
+		yinter += CELL_SIZE;		
 	xinter = startx + ((yinter - starty) / tan(ray_angl));
-	// xinter = startx + (yinter - starty) / tan(ray_angl);
-	tmp->step->y = 16;
+	tmp->step->y = CELL_SIZE;
 	if (!ray_is_down(ray_angl))
 		tmp->step->y *= -1;
-	tmp->step->x = 16 / tan(ray_angl);
+	tmp->step->x = CELL_SIZE / tan(ray_angl);
 	if (ray_is_right(ray_angl) && tmp->step->x < 0)
 		tmp->step->x *= -1;
 	else if (!ray_is_right(ray_angl) && tmp->step->x > 0)
@@ -195,30 +332,27 @@ t_wall	*cast_h(t_map *map, double ray_angl)
 	
 	if (!ray_is_down(ray_angl))
 		nwall_y -= 1;
-	while (nwall_x >= 0 && nwall_x <= (16 * map->w) && nwall_y >= 0 && nwall_y <= (16 * map->h))
+	while (nwall_x >= 0 && nwall_x <= (CELL_SIZE * map->w) && nwall_y >= 0 && nwall_y <= (CELL_SIZE * map->h))
 	{
-		index_x = nwall_x / 16;
-		index_y = nwall_y / 16;
+		index_x = nwall_x / CELL_SIZE;
+		index_y = nwall_y / CELL_SIZE;
 		if (map->map[index_y][index_x] == '1')
 		{
 			if (!ray_is_down(ray_angl))
 				nwall_y += 1;
-			found = true;
+			map->txtr->found_h = true;
 			tmp->wall->x = nwall_x;
 			tmp->wall->y = nwall_y;
-			// printf("x : %lf and y: %lf is inside a wall horizon\n", nwall_x, nwall_y);
-			// printf("index: map[%d][%d]\n", (int)(nwall_x  / 16), (int)(nwall_x / 16));
-			// draw_point(map, nwall_x, nwall_y, 0x6633AA);
+			
 			break;
 		}
 		else {
-			// printf("x : %lf and y: %lf is not inside a wall horizon\n", xinter, yinter);
-			// printf("index: map[%d][%d]\n", (int)(yinter  / 16), (int)(xinter / 16));	
+			
 			nwall_x += tmp->step->x;
 			nwall_y += tmp->step->y;
 		}
 	}
-	if (!found)
+	if (!map->txtr->found_h)
 	{
 		tmp->wall->x = __INT_MAX__;
 		tmp->wall->y = __INT_MAX__;
@@ -232,15 +366,16 @@ void	cast(t_map *map, double ray_angl)
 	t_wall	*wall_h;
 	t_wall	*wall_v;
 	t_wall	*end;
+	// double	ray_angl_tmp;
+
+	// ray_angl_tmp = ray_angl;	
 	wall_h = cast_h(map, ray_angl);
 	wall_v = cast_v(map, ray_angl);
-	// printf("distance hori: %lf\n", get_dist(map->rndr->pvec->x, wall_h->wall->x, map->rndr->pvec->y, wall_h->wall->y));
-	// printf("distance ver: %lf\n", get_dist(map->rndr->pvec->x, wall_v->wall->x, map->rndr->pvec->y, wall_v->wall->y));
 	
 
-	double startx = map->rndr->pvec->x + (16 / 2);
-	double starty = map->rndr->pvec->y  + (16 / 2); 
-	// // double	endx = wall_h->wall->x + (16 / 2);
+	double startx = map->rndr->pvec->x + (PLY_SIZE / 2);
+	double starty = map->rndr->pvec->y  + (PLY_SIZE / 2); 
+	
 	
 	double	distanceh = get_dist( startx, wall_h->wall->x, starty, wall_h->wall->y);
 	double	distancev = get_dist( startx, wall_v->wall->x, starty, wall_v->wall->y);
@@ -248,33 +383,21 @@ void	cast(t_map *map, double ray_angl)
 	if ( distanceh <= distancev)
 	{
 		end = wall_h;
+		map->txtr->found_h = true;
+		map->txtr->found_v = false;
+		
 		map = add_dist(map, distanceh, ray_angl);
 	}
 	else
 	{
 		end = wall_v;
+		map->txtr->found_v = true;
+		map->txtr->found_h = false;
 		map = add_dist(map, distancev, ray_angl);
 	}
-	// for (size_t i = 0; i <= map->rndr->dist->i; i++)
-	// {
-	// 	printf("distance: %lf\n", map->rndr->dist->arr[i]);
-	// }
-	// map->rndr->dist = add_dist(map, )
-	// end = cast_v(map, ray_angl);
-	// if (end->wall->x == INT_MAX || end->wall->y == INT_MAX)
-	// {
-	// 	printf("value is int max\n");
-	// 	exit(1);
-	// }
-	// if (wall_h->wall->x == INT_MAX || wall_h->wall->y == INT_MAX)
-	// 	end = wall_v;
-	// if (wall_v->wall->y == INT_MAX || wall_v->wall->y == INT_MAX)
-	// 	end = wall_h;
-	// printf("end x: %lf and y: %lf\n", end->wall->x, end->wall->y);
-	// bresenham(map, end->wall->x, end->wall->y, 0x00FF00);
+	
 	map = add_ray_coor(map, end->wall->x, end->wall->y);
-	// printf("ray_length in minimap: %zu\n", map->rndr->wall->rys_len);
-	// printf("endx: %lf and endy: %lf\n", end->wall->x, end->wall->y);
+	
 	
 }
 
@@ -287,7 +410,19 @@ void	cast_rays(t_map *map)
 	ray_angl = map->rndr->rot_angl - (map->rndr->fov / 2);
 	while (i < WIDTH)
 	{
+		map->txtr->found_v = false;
+		map->txtr->found_h = false;
 		cast(map, ray_angl);
+		if (map->txtr->found_v)
+		{
+			map->rndr->wall->vert[i] = true;
+			map->rndr->wall->horiz[i] = false;
+		}
+		else
+		{
+			map->rndr->wall->vert[i] = false;
+			map->rndr->wall->horiz[i] = true;
+		}
 		ray_angl += (map->rndr->fov / WIDTH);
 		i++;
 	}

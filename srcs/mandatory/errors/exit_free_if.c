@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:43:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/22 15:56:43 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/23 11:17:47 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exit_free_if( int cond, char *msg, t_map *map)
 			// 	tmp = tmp->next;
 			// }	
 			
-			mlx_destroy_window(map->mlx->mlx, map->mlx->win);
+			// mlx_destroy_window(map->mlx->mlx, map->mlx->win);
 		}
 		if (msg)	
 			ft_putendl_fd(msg, 2);

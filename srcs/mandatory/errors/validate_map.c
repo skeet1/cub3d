@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/19 10:17:03 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/23 22:38:45 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_map	*get_texture(char *line, t_map *map)
 		map->txtr->north = path;
 	else if (line[0] == 'S' && line[1] == 'O')
 		map->txtr->south = path;
-	else if (line[0] == 'E' && line[1] == 'E')
+	else if (line[0] == 'E' && line[1] == 'A')
 		map->txtr->east = path;
 	else if (line[0] == 'W' && line[1] == 'E')
 		map->txtr->west = path;

@@ -1,10 +1,10 @@
 
-SO ./resources/textures/example.xpm
-NO ./resources/textures/example.xpm
-WE ./resources/textures/example.xpm
-EA ./resources/textures/example.xpm
+SO ./resources/textures/south.xpm
+NO ./resources/textures/north.xpm
+WE ./resources/textures/west.xpm
+EA ./resources/textures/east.xpm
 
-F 255,100,0
+F 255,105,180
 C 100,23,33
 
 11111111111111111111111
