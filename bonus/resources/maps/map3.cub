@@ -4,7 +4,7 @@ NO ./resources/textures/north.xpm
 WE ./resources/textures/west.xpm
 EA ./resources/textures/east.xpm
 
-F 255,105,180
+F 155,118,83
 C 100,23,33
 
 11111111111111111111111

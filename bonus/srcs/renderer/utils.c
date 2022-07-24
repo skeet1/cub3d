@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 23:43:53 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 18:35:19 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/24 19:08:29 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,16 @@ t_map  *add_dist(t_map *map, double value, double ray_angle)
 {
     size_t  i;
 
-    
-    // size_t i;
-    // exit_free_if(!(new_arr = malloc(sizeof(*new_arr) * (map->rndr->wall->arr_len + 1))), "Error:\n\tmalloc failed\n", map);
-    // exit_free_if(!(new_arr_angl = malloc(sizeof(*new_arr) * (map->rndr->wall->arr_len + 1))), "Error:\n\tmalloc failed\n", map);
- 
-    // i = 0;
+
 
     if (map->rndr->wall->len_arr == WIDTH)
         map->rndr->wall->len_arr = 0;
     i = map->rndr->wall->len_arr - 1;
-    // while (i < map->rndr->wall->dist->len)
-    // {
-    //     new_arr[i] = map->rndr->wall->dist->arr[i];
-    //     new_arr_angl[i] = map->rndr->wall->
-    //     i++;
-    // }
-    // new_arr[i] = value;
+   
     map->rndr->wall->arr_dist[i] = value;
     map->rndr->wall->arr_angl[i] = ray_angle;
     map->rndr->wall->len_arr += 1;
-    // free(map->rndr->dist->arr);
-    // map->rndr->wall->dist->arr = new_arr;
+    
     return (map);
 }
 
@@ -66,9 +54,11 @@ int get_mouse_x(t_map *map)
 double  get_turn_spd(int x, int prev_x)
 {
     double turn_spd;
-    int  diff;
+    double  diff;
     diff = abs(x - prev_x);
     // turn_spd = (double)diff / (double)64;
+    // if (diff < 20)
+    //     return (degtorad(2));
     turn_spd = degtorad(diff / 100 + 2);
     return (turn_spd);
 

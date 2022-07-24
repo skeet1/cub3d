@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 18:34:58 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/24 19:06:19 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,9 @@ int	mouse_hook(int x, int y, t_map *map)
 	
 	x = get_mouse_x(map);
 	
-	if (x > (WIDTH / 2))
+	if (x - last_x > 0)
 		move(map, RIGHT);
-	else
+	else if (x - last_x < 0)
 		move(map, LEFT);
 	map->rndr->turn_spd = degtorad(10);
 	update_screen(map);

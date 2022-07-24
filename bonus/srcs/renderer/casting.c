@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 13:55:04 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:53:48 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,8 @@ void	project3d(t_map	*map)
 			botom_pix = HEIGHT;
 		for (int y = 0; y < top_pix; y++)
 		{
-			map->mlx->img_data[(y * WIDTH + i)] = 0x87ceeb;
-			// map->mlx->img_data[(y * WIDTH + i)] = map->clr->ceiling;
+			// map->mlx->img_data[(y * WIDTH + i)] = 0x87ceeb;
+			map->mlx->img_data[(y * WIDTH + i)] = map->clr->ceiling;
 		}
 		int	txtr_x;
 		if (map->rndr->wall->vert[i] == true)
@@ -178,8 +178,8 @@ void	project3d(t_map	*map)
 		// set the floor color
 		for (int y = botom_pix; y < HEIGHT; y++)
 		{
-			map->mlx->img_data[(y * WIDTH + i)] = 0x9b7653;
-			// map->mlx->img_data[(y * WIDTH + i)] = map->clr->floor;
+			// map->mlx->img_data[(y * WIDTH + i)] = 0x9b7653;
+			map->mlx->img_data[(y * WIDTH + i)] = map->clr->floor;
 		}
 		
 		//
