@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_free_if.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:43:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/23 11:17:47 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:41:59 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	exit_free_if( int cond, char *msg, t_map *map)
 		}
 		if (msg)	
 			ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
+	exit(0);
 	}
 }
