@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 13:55:04 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 16:41:02 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void	project3d(t_map	*map)
 		i++;
 	}
 	
-	draw_minimap(map);
+	// draw_minimap(map);
 	
 };
 
