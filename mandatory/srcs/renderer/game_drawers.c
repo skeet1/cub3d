@@ -78,8 +78,8 @@ void	draw_player(t_map *map)
 	double	x0;
 	double	y0;
 	
-	x0 = (map->rndr->pvec->x * SCL_FAC ) + (PLY_SIZE / 2);
-	y0 = (map->rndr->pvec->y * SCL_FAC) + (PLY_SIZE / 2);
+	x0 = (map->rndr->pvec->x * SCL_FAC);
+	y0 = (map->rndr->pvec->y * SCL_FAC);
 	prev_x = x0 ;
 	while (y0 <= ((map->rndr->pvec->y * SCL_FAC) + PLY_SIZE))
 		{
