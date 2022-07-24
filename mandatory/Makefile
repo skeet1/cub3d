@@ -1,6 +1,6 @@
 NAME = wolf3d
 
-MNDTR_PATH = ./srcs/mandatory
+MNDTR_PATH = ./srcs/
 SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 		$(MNDTR_PATH)/errors/exit_free_if.c\
 		$(MNDTR_PATH)/parser/parser_utils.c\

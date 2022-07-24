@@ -1,28 +1,28 @@
 NAME = wolf3d
 
-MNDTR_PATH = ./srcs/mandatory
-SRCS = $(MNDTR_PATH)/errors/validate_map.c\
-		$(MNDTR_PATH)/errors/exit_free_if.c\
-		$(MNDTR_PATH)/parser/parser_utils.c\
-		$(MNDTR_PATH)/parser/parser.c\
-		$(MNDTR_PATH)/renderer/renderer.c\
-		$(MNDTR_PATH)/renderer/render_map.c\
-		$(MNDTR_PATH)/renderer/math_utils.c\
-		$(MNDTR_PATH)/renderer/init.c\
-		$(MNDTR_PATH)/renderer/mlx_utils.c\
-		$(MNDTR_PATH)/renderer/shape_drawers.c\
-		$(MNDTR_PATH)/renderer/game_drawers.c\
-		$(MNDTR_PATH)/renderer/moves.c\
-		$(MNDTR_PATH)/renderer/casting.c\
-		$(MNDTR_PATH)/renderer/utils.c	
+BONUS_PATH = ./srcs/
+SRCS = $(BONUS_PATH)/errors/validate_map.c\
+		$(BONUS_PATH)/errors/exit_free_if.c\
+		$(BONUS_PATH)/parser/parser_utils.c\
+		$(BONUS_PATH)/parser/parser.c\
+		$(BONUS_PATH)/renderer/renderer.c\
+		$(BONUS_PATH)/renderer/render_map.c\
+		$(BONUS_PATH)/renderer/math_utils.c\
+		$(BONUS_PATH)/renderer/init.c\
+		$(BONUS_PATH)/renderer/mlx_utils.c\
+		$(BONUS_PATH)/renderer/shape_drawers.c\
+		$(BONUS_PATH)/renderer/game_drawers.c\
+		$(BONUS_PATH)/renderer/moves.c\
+		$(BONUS_PATH)/renderer/casting.c\
+		$(BONUS_PATH)/renderer/utils.c	
 
 RM = rm -rf
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror -g  -mmacosx-version-min=10.15 -arch arm64
 CFLAGS = -Wall -Wextra -Werror -g 
 OBJS = $(SRCS:.c=.o)
-INCS = -I$(MNDTR_PATH)/includes/ -I./srcs/utils/libft/
-INCLDS = $(MNDTR_PATH)/includes/parser.h $(MNDTR_PATH)/includes/errors.h $(MNDTR_PATH)/includes/renderer.h 
+INCS = -I$(BONUS_PATH)/includes/ -I./srcs/utils/libft/
+INCLDS = $(BONUS_PATH)/includes/parser.h $(BONUS_PATH)/includes/errors.h $(BONUS_PATH)/includes/renderer.h 
 LIBFT_PATH = ./srcs/utils/libft/
 MINLBX_PATH = ./srcs/utils/minilibx/
 

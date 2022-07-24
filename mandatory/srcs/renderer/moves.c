@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 13:49:53 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 15:54:28 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	update_pos(double *x, double *y, t_map *map)
 
 void	update_ang(t_map *map) 
 {
-
-	// map->rndr->rot_angl = normalize_ang(map->rndr->rot_angl);
-	// map->rndr->turn_spd = normalize_ang(map->rndr->turn_spd);
 	map->rndr->rot_angl += (map->rndr->turn_dir * map->rndr->turn_spd);
 }
 
@@ -145,15 +142,8 @@ void	move(t_map *map, int mv)
 }
 
 
-
-
-
 int	move_player(int key_code, t_map *map)
 {
-
-	/*if (inside_wall(map, key_code))*/
-		/*return (1);*/
-	
 	
 	move(map, key_code);
 	if (key_code == EXIT)

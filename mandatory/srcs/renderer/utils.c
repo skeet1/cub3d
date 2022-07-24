@@ -6,30 +6,12 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 23:43:53 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/23 23:58:14 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/24 15:54:18 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <renderer.h>
 
-
-bool    is_ne(double ray_angl)
-{
-    return (ray_angl >= 0 && ray_angl < M_PI_2);
-}
-
-bool    is_nw(double ray_angl)
-{
-    return (ray_angl >= M_PI_2 && ray_angl < M_PI);
-}
-bool    is_sw(double ray_angl)
-{
-    return (ray_angl >= M_PI && ray_angl < M_PI_2 * 3);
-}
-bool    is_se(double ray_angl)
-{
-    return (ray_angl >= M_PI_2 * 3 && ray_angl < M_PI_2 * 4);
-}
 
 // add ray angle param 
 t_map  *add_dist(t_map *map, double value, double ray_angle)
