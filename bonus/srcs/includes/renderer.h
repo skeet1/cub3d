@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 14:56:37 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 17:51:54 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@
 # define LEFT 123
 # define EXIT 53
 
+
+// moves 
+double  get_turn_spd(int x, int prev_x);
+
+
+// xlib macros
+# define MOTION_NOTIFY 6
+# define POINTER_MOTION_MASK (1L << 6)
+# define MOTION_MASK (POINTER_MOTION_MASK | MOTION_NOTIFY)
+# define POINTER_MOTION_HINT_MASK (1L << 8)
+
+
 void    renderer(t_map *map);
 void    render_map(t_map *map);
 void    rasterize_vector(int x1, int y1, int x2, int y2, int c, t_map *map);
@@ -64,9 +76,12 @@ void	draw_minimap(t_map	*map);
 
 // void	draw_rect2(t_map *map, double x, double y, int width, int height);
 
+// hooks 
+int     mouse_hook(int x, int y, t_map *map);
+int     move_player(int key_code, t_map *map);
+
 
 // moves
-int     move_player(int key_code, t_map *map);
 void	update_ang(t_map *map);
 void	bresenham(t_map *map, int x1, int y1, int clr);
 void	update_pos(double *x, double *y, t_map *map);
@@ -91,11 +106,12 @@ void	draw_bottom_wall(t_map *map, double x, double y, int width, int height);
 
 
 // utils
-bool    is_ne(double ray_angl);
-bool    is_nw(double ray_angl);
-bool    is_sw(double ray_angl);
-bool    is_se(double ray_angl);
+
 bool	ray_is_down(double angle);
 bool	ray_is_right(double angle);
 double	normalize_ang(double angle);
+int get_mouse_x(t_map *map);
+void    update_screen(t_map *map);
+
+
 #endif

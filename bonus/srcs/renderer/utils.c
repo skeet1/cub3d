@@ -6,30 +6,11 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 23:43:53 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/23 23:58:14 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:35:19 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <renderer.h>
-
-
-bool    is_ne(double ray_angl)
-{
-    return (ray_angl >= 0 && ray_angl < M_PI_2);
-}
-
-bool    is_nw(double ray_angl)
-{
-    return (ray_angl >= M_PI_2 && ray_angl < M_PI);
-}
-bool    is_sw(double ray_angl)
-{
-    return (ray_angl >= M_PI && ray_angl < M_PI_2 * 3);
-}
-bool    is_se(double ray_angl)
-{
-    return (ray_angl >= M_PI_2 * 3 && ray_angl < M_PI_2 * 4);
-}
 
 // add ray angle param 
 t_map  *add_dist(t_map *map, double value, double ray_angle)
@@ -65,35 +46,38 @@ t_map  *add_dist(t_map *map, double value, double ray_angle)
 t_map   *add_ray_coor(t_map *map, double x, double y)
 {
 
-    // t_rays  *tmp;
-    // size_t i;
-    // if (map->rndr->wall->rays == NULL)
-    // {
-    //     exit_free_if(!(map->rndr->wall->rays = malloc(sizeof(t_rays))), "Error:\n\tmalloc failed\n", map);
-    //     exit_free_if(!(map->rndr->wall->rays->coor = malloc(sizeof(t_vector))), "Error:\n\tmalloc failed\n", map);
-    //     map->rndr->wall->rays->coor->x = x;
-    //     map->rndr->wall->rays->coor->y = y;
-    //     map->rndr->wall->rays->next = NULL;
-    //     map->rndr->wall->rys_len = 1;
-    // }
-    // if (map->rndr->wall->rys_len > WIDTH)
-    //     map->rndr->wall->rys_len = 0;
-    // i = 0;
-    // tmp = map->rndr->wall->rays;
-    // while (tmp->next)
-    //     tmp = tmp->next;
-    // exit_free_if(!(tmp->next = malloc(sizeof(*tmp->next))), "Error:\n\tmalloc failed\n", map);
-    // exit_free_if(!(tmp->next->coor = malloc(sizeof(*tmp->next->coor))), "Error:\n\tmalloc failed\n", map);
-    // tmp->next->coor->x = x;
-    // tmp->next->coor->y = y;
-
-    // map->rndr->wall->rys_len += 1;
-    // map->rndr->wall->rays->next = tmp->next;
-    // map->rndr->wall->rays->next->next = NULL;
     if (map->rndr->wall->rys_len >= WIDTH)
         map->rndr->wall->rys_len = 0;
     map->rndr->wall->rays[map->rndr->wall->rys_len].x = x;
     map->rndr->wall->rays[map->rndr->wall->rys_len].y = y;
     map->rndr->wall->rys_len += 1;
     return (map);
+}
+
+int get_mouse_x(t_map *map)
+{
+    int x;
+    int y;
+    
+    mlx_mouse_get_pos(map->mlx->win, &x, &y);
+    return (x);
+}
+
+double  get_turn_spd(int x, int prev_x)
+{
+    double turn_spd;
+    int  diff;
+    diff = abs(x - prev_x);
+    // turn_spd = (double)diff / (double)64;
+    turn_spd = degtorad(diff / 100 + 2);
+    return (turn_spd);
+
+}
+
+void    update_screen(t_map *map)
+{
+    mlx_clear_window(map->mlx->mlx, map->mlx->win);
+	map = new_img(map);
+	draw_map(map, 1);
+	mlx_put_image_to_window(map->mlx->mlx, map->mlx->win, map->mlx->img, 0, 0);
 }

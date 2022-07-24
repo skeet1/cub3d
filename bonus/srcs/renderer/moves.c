@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 15:33:54 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 18:34:58 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	update_pos(double *x, double *y, t_map *map)
 
 void	update_ang(t_map *map) 
 {
-
-	// map->rndr->rot_angl = normalize_ang(map->rndr->rot_angl);
-	// map->rndr->turn_spd = normalize_ang(map->rndr->turn_spd);
 	map->rndr->rot_angl += (map->rndr->turn_dir * map->rndr->turn_spd);
 }
 
@@ -55,7 +52,7 @@ bool	inside_wall(double x, double y, t_map *map)
 
 void	move_right(t_map *map)
 {
-	printf("right : x =%lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
+	// printf("right : x =%lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
 	double	x;
 	double	y;
 	int		index_x;
@@ -84,7 +81,7 @@ void	move_right(t_map *map)
 }
 void	move_left(t_map *map)
 {
-	printf("left : x = %lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
+	// printf("left : x = %lf, y = %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
 	double	x;
 	double	y;
 	int		index_x;
@@ -97,7 +94,7 @@ void	move_left(t_map *map)
 
 		index_x = (x                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               + incx) / CELL_SIZE;
 		index_y = (y + incy) / CELL_SIZE;
-		printf("left inside: x: %lf, y: %lf, i_x : %d, i_y: %d\n", x+ incx, y+ incy, index_x, index_y);
+		// printf("left inside: x: %lf, y: %lf, i_x : %d, i_y: %d\n", x+ incx, y+ incy, index_x, index_y);
 		if (map->map[index_y][index_x] == '1')
 			return ;
 		if (i == 0)
@@ -118,9 +115,7 @@ void	move(t_map *map, int mv)
 	else if (mv == RIGHT)
 		map->rndr->turn_dir = 1;
 	if (mv == LEFT || mv == RIGHT)
-	{
 		update_ang(map);
-	}
 	if (mv == KEY_W)
 		map->rndr->walk_dir = 1;
 	else if (mv == KEY_S)
@@ -145,23 +140,34 @@ void	move(t_map *map, int mv)
 
 
 
+int	mouse_hook(int x, int y, t_map *map)
+{
+	// keep of last position of x and decrease or increase angle of rotation based on difference between last and current position of x
+	(void)y;
+	static	int last_x;
+	if (x > WIDTH || x < 0)
+		return (0);
+	map->rndr->turn_spd = get_turn_spd(last_x, x);
+	
+	x = get_mouse_x(map);
+	
+	if (x > (WIDTH / 2))
+		move(map, RIGHT);
+	else
+		move(map, LEFT);
+	map->rndr->turn_spd = degtorad(10);
+	update_screen(map);
+	last_x = x;
+	return (0);
+}
 
 int	move_player(int key_code, t_map *map)
 {
 
-	/*if (inside_wall(map, key_code))*/
-		/*return (1);*/
-	
-	
 	move(map, key_code);
 	if (key_code == EXIT)
 		exit_free_if(true, NULL, NULL);
-	mlx_clear_window(map->mlx->mlx, map->mlx->win);
-	map = new_img(map);
-	draw_map(map, 1);
-	mlx_put_image_to_window(map->mlx->mlx, map->mlx->win, map->mlx->img, 0, 0);
+	update_screen(map);
 	return (0);
 
 }
-
-void	rotate() {};

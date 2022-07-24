@@ -27,9 +27,9 @@ LIBFT_PATH = ./srcs/utils/libft/
 MINLBX_PATH = ./srcs/utils/minilibx/
 
 
-MLX = -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit
+MLX = -L$(MINLBX_PATH) -lmlx -framework OpenGL -framework AppKit
 #MLX = $(wildcard $(MINLBX_PATH)*)
-MLX_INC = -I/usr/local/include/
+MLX_INC = -I$(MINLBX_PATH)/
 %.o: %.c $(INCLDS)
 	$(CC) $(CFLAGS) $(INCS) $(MLX_INC) -c $< -o $@
 

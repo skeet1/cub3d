@@ -14,17 +14,13 @@
 void	draw_rays(t_map *map)
 {
 	size_t		i;
-
 	i = 0;	
-	
 	while (i < map->rndr->wall->rys_len)
 	{
-		
 		bresenham(map, map->rndr->wall->rays[i].x * SCL_FAC , map->rndr->wall->rays[i].y * SCL_FAC ,  0x03B965);
 		i++;
 	}
 }
-
 
 void	draw_minimap(t_map	*map)
 {
@@ -62,18 +58,13 @@ void	draw_minimap(t_map	*map)
 
 void	draw_player(t_map *map)
 {	
-	// draw_rect(map, map->rndr->pvec->x , map->rndr->pvec->y, PLY_SIZE, PLY_SIZE);
-
-	// drawing a cicle as a player
-	// int		x;
-	// int		y;
 	int		i;
 	double	prev_x;
 	double	x0;
 	double	y0;
 
 	i = 0;
-	printf("we will draw player start form x : %lf, y: %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
+	// printf("we will draw player start form x : %lf, y: %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
 	x0 = (map->rndr->pvec->x * SCL_FAC);
 	y0 = (map->rndr->pvec->y * SCL_FAC);
 	prev_x = x0;
