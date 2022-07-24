@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 17:51:54 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/24 20:49:27 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define CELL_SIZE 64
 
 // # define SPEED 2
-# define PLY_SIZE 16 * SCL_FAC
+# define PLY_SIZE 32 * SCL_FAC
 # define NUM_RAYS WIDTH / 2
 
 // key codes

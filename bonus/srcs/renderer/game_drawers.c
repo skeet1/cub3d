@@ -59,25 +59,57 @@ void	draw_minimap(t_map	*map)
 void	draw_player(t_map *map)
 {	
 	int		i;
-	double	prev_x;
-	double	x0;
-	double	y0;
+	// double	prev_x;
+	int	x0;
+	int	y0;
 
 	i = 0;
-	// printf("we will draw player start form x : %lf, y: %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
+	printf("we will draw player start form x : %lf, y: %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
+
+	// printf("---we will draw player start form x : %lf, y: %lf\n", map->rndr->pvec->x, map->rndr->pvec->y);
 	x0 = (map->rndr->pvec->x * SCL_FAC);
 	y0 = (map->rndr->pvec->y * SCL_FAC);
-	prev_x = x0;
-	while (y0 <= ((map->rndr->pvec->y * SCL_FAC) + PLY_SIZE))
+	double x1, y1;
+	// if (x0 % 32 > 0 && x0 % 32 < 4)
+	// 	x0 = ((x0 / 32) * 32);
+	// if (y0 % 32 > 0 && y0 % 32 < 4)
+	// 	y0 = ((y0 / 32) * 32);
+	if (x0 % 8 > 0 && x0 % 8 < 8 && x0 / 8)
+		x0 = (x0 / 8) * 8;
+	if (y0 % 8 > 0 && y0 % 8 < 8 && y0 / 8)
+		y0 = ((y0 / 8) * 8);
+	x1 = x0;
+	y1 = y0;
+	while (x0 < x1 + PLY_SIZE)
 	{
-		x0 = prev_x;
-		while (x0 <= ((map->rndr->pvec->x * SCL_FAC) + PLY_SIZE))
-		{	
+		y0 = y1;
+		while (y0 < y1 + PLY_SIZE)
+		{
 			put_pix_to_img(map, x0, y0, 0xB0B0B0);
-			x0++;
+			y0++;
 		}
-		y0++;
+		x0++;
 	}
+	// if ((int)x0 % 28 >= 0 && (int)x0 % 28 <= 4)
+	// {
+	// 	x0 = 28;
+	// 	y_size -= (int)x0 % 28;
+	// }
+	// prev_x = x0;
+	// while (y0 <= ((map->rndr->pvec->y * SCL_FAC) + x_size))
+	// {
+	// 	// printf("---------first\n");
+	// 	x0 = prev_x;
+	// 	while (x0 <= ((map->rndr->pvec->x * SCL_FAC) + y_size))
+	// 	{
+	// 		// printf("------------here\n");
+	// 		// printf("[%.2lf][%.2lf]\t", x0, y0);
+	// 		put_pix_to_img(map, x0, y0, 0xB0B0B0);
+	// 		x0++;
+	// 	}
+	// 	// printf("\n");
+	// 	y0++;
+	// }
 }
 		
 

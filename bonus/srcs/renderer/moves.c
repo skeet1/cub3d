@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 19:06:19 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/24 21:14:56 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	move_right(t_map *map)
 
 	for (int i = 0, incx = 0, incy = 0; i < 4; i++)
 	{
-		x = map->rndr->pvec->x + cos(map->rndr->rot_angl + degtorad(90));
-		y = map->rndr->pvec->y + sin(map->rndr->rot_angl + degtorad(90));
+		x = map->rndr->pvec->x + cos(map->rndr->rot_angl + degtorad(90)) * 4;
+		y = map->rndr->pvec->y + sin(map->rndr->rot_angl + degtorad(90)) * 4;
 
 		index_x = (x + incx) / CELL_SIZE;
 		index_y = (y + incy) / CELL_SIZE;
@@ -89,8 +89,8 @@ void	move_left(t_map *map)
 
 	for (int i = 0, incx = 0, incy = 0; i < 4; i++)
 	{
-		x = map->rndr->pvec->x + cos(map->rndr->rot_angl - degtorad(90));
-		y = map->rndr->pvec->y + sin(map->rndr->rot_angl - degtorad(90));
+		x = map->rndr->pvec->x + cos(map->rndr->rot_angl - degtorad(90)) * 4;
+		y = map->rndr->pvec->y + sin(map->rndr->rot_angl - degtorad(90)) * 4;
 
 		index_x = (x                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               + incx) / CELL_SIZE;
 		index_y = (y + incy) / CELL_SIZE;
