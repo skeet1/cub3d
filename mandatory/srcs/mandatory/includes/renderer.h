@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 10:59:36 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 13:46:11 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include <math.h>
 # include <stdlib.h>
 #include <limits.h>
-# define SCL_FAC 1
+# define SCL_FAC 0.25
 # define CELL_SIZE 64
 
 // # define SPEED 2
-# define PLY_SIZE 4 * SCL_FAC
+# define PLY_SIZE 16 * SCL_FAC
 # define NUM_RAYS WIDTH / 2
 
 // key codes

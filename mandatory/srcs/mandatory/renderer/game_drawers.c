@@ -53,7 +53,7 @@ void	draw_minimap(t_map	*map)
 		i++;
 		y += (CELL_SIZE * SCL_FAC);
 	}
-	draw_rays(map);
+	// draw_rays(map);
 	draw_player(map);
 }
 

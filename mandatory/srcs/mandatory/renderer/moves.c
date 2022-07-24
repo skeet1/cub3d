@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 11:25:16 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/24 13:49:53 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ bool	inside_wall(double x, double y, t_map *map)
 		if (map->map[index_y][index_x] == '1')
 			return (true);
 		if (i == 0)
-			incx += 4;
+			incx += PLY_SIZE;
 		else if (i == 1)
-			incy += 4;
+			incy += PLY_SIZE;
 		else if (i == 2)
-			incx -= 4;
+			incx -= PLY_SIZE;
 		else if (i == 3)
-			incy -= 4;
+			incy -= PLY_SIZE;
 	}
 	return (false);
 }
