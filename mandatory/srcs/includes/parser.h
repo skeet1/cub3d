@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/25 18:12:19 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 00:09:45 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ typedef struct s_v {
 	int	y;
 }			t_v;
 
-typedef	struct s_darr {
+typedef struct s_darr {
 	double	*arr;
 	size_t	len;
 }			t_darr;
 
-typedef	struct	s_wall {
+typedef struct s_wall {
 	t_vector	*wall;
 	int			wall_top_pixel;
 	int			wall_height;
@@ -46,7 +46,7 @@ typedef	struct	s_wall {
 	bool		horiz[WIDTH];
 	size_t		len_arr;
 	size_t		rys_len;
-} t_wall;
+}				t_wall;
 
 typedef struct s_render {
 	t_vector	*pvec;
@@ -57,7 +57,7 @@ typedef struct s_render {
 	double		walk_spd;
 	double		turn_spd;
 	t_wall		*wall;
-}	t_render;
+}				t_render;
 
 // minilibx struct
 typedef struct s_mlx {
@@ -68,10 +68,10 @@ typedef struct s_mlx {
 	int		bpp;
 	int		size_line;
 	int		endian;
-} t_mlx;
+}				t_mlx;
 
 // Textures
-typedef	struct s_textures {
+typedef struct s_textures {
 	void			*img_s;
 	void			*img_n;
 	void			*img_e;
@@ -83,8 +83,8 @@ typedef	struct s_textures {
 	int				bpp;
 	int				size_line;
 	int				endian;
-	bool 			found_h;
-	bool 			found_v;
+	bool			found_h;
+	bool			found_v;
 	int				*north_data;
 	int				*south_data;
 	int				*east_data;
@@ -108,12 +108,69 @@ typedef struct s_colors {
 typedef struct s_map {
 	unsigned long		w;
 	unsigned long		h;
-	char			**map;
-	t_colors		*clr;
-	t_textures		*txtr;
-	t_mlx			*mlx;
-	t_render		*rndr;
+	char				**map;
+	t_colors			*clr;
+	t_textures			*txtr;
+	t_mlx				*mlx;
+	t_render			*rndr;
 }				t_map;
+
+// struct of variables needed in moves
+typedef struct s_moves {
+	double	x;
+	double	y;
+	int		index_x;
+	int		index_y;
+	int		incx;
+	int		incy;
+	int		i;
+}				t_moves;
+
+// struct of variables needed in draw_map
+typedef struct s_drawmap {
+	int		x;
+	int		y;
+	bool	p;
+	int		i;
+	int		j;
+}				t_drawmap;
+
+// struct of variables needed in project3d
+typedef struct s_p3d {
+	int		i;
+	int		botom_pix;
+	double	proj_plan;
+	double	wall_proj_height;
+	int		top_pix;
+	int		y;
+	int		txtr_x;
+	int		dist_from_top;
+	int		txtr_y;
+}				t_p3d;
+
+// struct of variables needed in castH and castV
+typedef struct s_cast {
+	double	xinter;
+	double	yinter;
+	int		index_x;
+	int		index_y;
+	double	nwall_x;
+	double	nwall_y;
+	double	startx;
+	double	starty;
+	t_wall	*tmp;
+}			t_cast;
+
+// struct of variables needed first step of casting
+typedef struct s_start_cast {
+	t_wall	*wall_h;
+	t_wall	*wall_v;
+	t_wall	*end;
+	double	startx;
+	double	starty;
+	double	distanceh;
+	double	distancev;
+}			t_start_cast;
 
 bool	is_identifier(char *line);
 bool	is_map(char *line);
