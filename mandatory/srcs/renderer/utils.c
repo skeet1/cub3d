@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 23:43:53 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/25 17:43:44 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/25 19:10:47 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_map	*add_dist(t_map *map, double value, double ray_angle)
 	map->rndr->wall->len_arr += 1;
 	return (map);
 }
-
 
 t_map	*add_ray_coor(t_map *map, double x, double y)
 {
