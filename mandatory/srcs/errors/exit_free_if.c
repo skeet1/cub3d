@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:43:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/24 18:41:59 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/25 18:13:14 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	exit_free_if( int cond, char *msg, t_map *map)
 {
-	// t_rays	*tmp;
-	if (cond) {
-
-		if (map){
+	if (cond)
+	{
+		if (map)
+		{
 		// free stuff here
 			// ft_doubfree(map->map, ft_2darr_len((const char **)map->map));
 			// ft_sfree(map->clr);
@@ -51,6 +51,6 @@ void	exit_free_if( int cond, char *msg, t_map *map)
 		}
 		if (msg)	
 			ft_putendl_fd(msg, 2);
-	exit(0);
+		exit(0);
 	}
 }

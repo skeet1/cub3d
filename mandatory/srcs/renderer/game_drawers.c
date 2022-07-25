@@ -11,20 +11,6 @@
 /* ************************************************************************** */
 
 #include <renderer.h>
-void	draw_rays(t_map *map)
-{
-	size_t		i;
-
-	i = 0;	
-	
-	while (i < map->rndr->wall->rys_len)
-	{
-		
-		bresenham(map, map->rndr->wall->rays[i].x * SCL_FAC , map->rndr->wall->rays[i].y * SCL_FAC ,  0x03B965);
-		i++;
-	}
-}
-
 
 void	draw_minimap(t_map	*map)
 {
@@ -53,25 +39,12 @@ void	draw_minimap(t_map	*map)
 		i++;
 		y += (CELL_SIZE * SCL_FAC);
 	}
-	// draw_rays(map);
 	draw_player(map);
 }
-
-// }
-
-
 void	draw_player(t_map *map)
-{	
-	// draw_rect(map, map->rndr->pvec->x , map->rndr->pvec->y, PLY_SIZE, PLY_SIZE);
-
-	// drawing a cicle as a player
-	// int		x;
-	// int		y;
+{
 	int		i;
 
-
-	// x = map->rndr->pvec->x;
-	// y = map->rndr->pvec->y;
 	i = 0;
 	
 	double	prev_x;
@@ -82,17 +55,15 @@ void	draw_player(t_map *map)
 	y0 = (map->rndr->pvec->y * SCL_FAC);
 	prev_x = x0 ;
 	while (y0 <= ((map->rndr->pvec->y * SCL_FAC) + PLY_SIZE))
-		{
-			// x = prev_x;
-			x0 = prev_x;
-			// if we're at the edge of the intersection move the player u
-			while (x0 <= ((map->rndr->pvec->x * SCL_FAC)+ PLY_SIZE))
-			{	
-				put_pix_to_img(map, x0,y0  , 0xB0B0B0);
-				x0++;
-			}
-			y0++;
-}
+	{
+		x0 = prev_x;
+		while (x0 <= ((map->rndr->pvec->x * SCL_FAC)+ PLY_SIZE))
+		{	
+			put_pix_to_img(map, x0,y0  , 0xB0B0B0);
+			x0++;
+		}
+		y0++;
+	}
 }
 		
 
@@ -122,17 +93,22 @@ bool	isplayer(char c)
 	return (false);
 }
 
-void	draw_map(t_map *map, int flag) {
-	int	x;
-	int	y;
+void	draw_map(t_map *map, int flag)
+{
+	int		x;
+	int		y;
 	bool	p;
+	int		i;
+	int		j;
+
 	p = false;
-	x = 0;  
 	y = 0;
-	for (int i = 0; map->map[i]; i++)
+	i = -1;
+	while (map->map[++i])
 	{
 		x = 0;
-		for (int j = 0; map->map[i][j]; j++)
+		j = -1;
+		while (map->map[i][++j])
 		{
 			if (isplayer(map->map[i][j]) && !flag)
 			{
@@ -141,21 +117,15 @@ void	draw_map(t_map *map, int flag) {
 				map->rndr->pvec->x = x;
 				map->rndr->pvec->y = y;
 				break;
-			}			
+			}		
 			x += CELL_SIZE;
 		}
 		y += CELL_SIZE;
 	}
 	if (flag == 1 || p == true)
 	{
-		// draw_player(map);
-		cast_rays(map);	
-		// for (size_t i = 0; i < map->rndr->dist->len; i++)
-		// {
-		// 	printf("dist: %lf\n", map->rndr->dist->arr[i]);
-		// }
+		cast_rays(map);
 		project3d(map);
-		// draw_minimap(map);
 	}
 }
 
