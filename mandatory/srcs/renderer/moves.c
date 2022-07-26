@@ -35,8 +35,8 @@ bool	inside_wall(double x, double y, t_map *map)
 	mvs.incy = 0;
 	while (++mvs.i < 4)
 	{
-		mvs.x = map->rndr->pvec->x + mvs.incx;
-		mvs.y = map->rndr->pvec->y + mvs.incy;
+		x = map->rndr->pvec->x + mvs.incx;
+		y = map->rndr->pvec->y + mvs.incy;
 		update_pos(&x, &y, map);
 		mvs.index_x = x / CELL_SIZE;
 		mvs.index_y = y / CELL_SIZE;
