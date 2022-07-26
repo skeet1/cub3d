@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/25 21:25:07 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 14:42:10 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	check_exit_free(t_map *map)
 		"Error:\n\tmalloc failed", map);
 	exit_free_if(!(map->txtr->north_vec
 			= malloc(sizeof(*map->txtr->north_vec))),
+		"Error:\n\tmalloc failed", map);
+	exit_free_if(!(map->rndr->proj
+			= malloc(sizeof(*map->rndr->proj))),
 		"Error:\n\tmalloc failed", map);
 }
 
