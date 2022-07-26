@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 00:09:45 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 11:11:12 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ typedef struct s_darr {
 	size_t	len;
 }			t_darr;
 
+// struct of variables needed in project3d
+typedef    struct    s_3dproj {
+    double        proj_plan;
+    double        wall_proj_height;
+    int            botom_pix;
+    int            top_pix;
+
+} t_3dproj;
+
 typedef struct s_wall {
 	t_vector	*wall;
 	int			wall_top_pixel;
@@ -57,6 +66,7 @@ typedef struct s_render {
 	double		walk_spd;
 	double		turn_spd;
 	t_wall		*wall;
+	t_3dproj	*proj;
 }				t_render;
 
 // minilibx struct
@@ -134,19 +144,6 @@ typedef struct s_drawmap {
 	int		i;
 	int		j;
 }				t_drawmap;
-
-// struct of variables needed in project3d
-typedef struct s_p3d {
-	int		i;
-	int		botom_pix;
-	double	proj_plan;
-	double	wall_proj_height;
-	int		top_pix;
-	int		y;
-	int		txtr_x;
-	int		dist_from_top;
-	int		txtr_y;
-}				t_p3d;
 
 // struct of variables needed in castH and castV
 typedef struct s_cast {

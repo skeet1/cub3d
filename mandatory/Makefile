@@ -15,9 +15,12 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 		$(MNDTR_PATH)/renderer/moves.c\
 		$(MNDTR_PATH)/renderer/moves1.c\
 		$(MNDTR_PATH)/renderer/casting.c\
-		$(MNDTR_PATH)/renderer/casting_utils.c\
-		$(MNDTR_PATH)/renderer/cast.c\
+		$(MNDTR_PATH)/renderer/cast_calculate.c\
 		$(MNDTR_PATH)/renderer/cast_utils.c\
+		$(MNDTR_PATH)/renderer/cast_utils2.c\
+		$(MNDTR_PATH)/renderer/project_3d.c\
+		$(MNDTR_PATH)/renderer/prj_calculate.c\
+		$(MNDTR_PATH)/renderer/intersection.c\
 		$(MNDTR_PATH)/renderer/utils.c	
 
 RM = rm -rf

@@ -6,94 +6,126 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/25 23:23:09 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 11:02:40 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <renderer.h>
 
-double	denormalize_angle(double angle)
-{
-	angle = remainder(angle - M_PI, 2 * M_PI);
-	if (angle < 0)
-		angle += M_PI * 2;
-	return (angle);
-}
-
-void	get_txtr(t_map *map, double ray_angl)
-{
-	ray_angl = denormalize_angle(ray_angl);
-	if (!ray_is_down(ray_angl) && ray_is_right(ray_angl))
-	{
-		map->txtr->data_h = map->txtr->south_data;
-		map->txtr->data_v = map->txtr->west_data;
-	}
-	if (!ray_is_down(ray_angl) && !ray_is_right(ray_angl))
-	{
-		map->txtr->data_h = map->txtr->south_data;
-		map->txtr->data_v = map->txtr->east_data;
-	}
-	if (ray_is_down(ray_angl) && ray_is_right(ray_angl))
-	{
-		map->txtr->data_h = map->txtr->north_data;
-		map->txtr->data_v = map->txtr->west_data;
-	}
-	if (ray_is_down(ray_angl) && !ray_is_right(ray_angl))
-	{
-		map->txtr->data_h = map->txtr->north_data;
-		map->txtr->data_v = map->txtr->east_data;
-	}
-}
-
-void	project3d_assistant(t_map *map, t_p3d *p3d)
-{
-	p3d->proj_plan = ((WIDTH / 2) / tan(map->rndr->fov / 2.00));
-	map->rndr->wall->arr_dist[p3d->i]
-		*= cos(map->rndr->wall->arr_angl[p3d->i] - map->rndr->rot_angl);
-	p3d->wall_proj_height = (CELL_SIZE / map->rndr->wall->arr_dist[p3d->i])
-		* p3d->proj_plan;
-	map->rndr->wall->wall_height = (int)p3d->wall_proj_height;
-	p3d->top_pix = (int)(HEIGHT / 2) - (int)(p3d->wall_proj_height / 2);
-	if (p3d->top_pix < 0 || p3d->top_pix > HEIGHT)
-		p3d->top_pix = 0;
-	p3d->botom_pix = (HEIGHT / 2) + (map->rndr->wall->wall_height / 2);
-	if (p3d->botom_pix > HEIGHT || p3d->botom_pix < 0)
-		p3d->botom_pix = HEIGHT;
-	p3d->y = -1;
-	while (++p3d->y < p3d->top_pix)
-		map->mlx->img_data[(p3d->y * WIDTH + p3d->i)] = 0x87ceeb;
-	if (map->rndr->wall->vert[p3d->i] == true)
-		p3d->txtr_x = (int)map->rndr->wall->rays[p3d->i].y % 64;
-	else
-		p3d->txtr_x = (int)map->rndr->wall->rays[p3d->i].x % 64;
-	get_txtr(map, map->rndr->wall->arr_angl[p3d->i]);
-	p3d->y = p3d->top_pix;
-}
-
 void	project3d(t_map	*map)
 {
-	t_p3d	p3d;
+	int	i;
+	int	y;
+	int	txtr_x;
 
-	p3d.i = -1;
-	while (++p3d.i < WIDTH)
+	i = 0;
+	y = 0;
+	while (i < WIDTH)
 	{
-		project3d_assistant(map, &p3d);
-		while (p3d.y < p3d.botom_pix)
+		set_wall_info(map, i);
+		project_ceiling(map, i);
+		if (map->rndr->wall->vert[i] == true)
+			txtr_x = (int)map->rndr->wall->rays[i].y % 64;
+		else
+			txtr_x = (int)map->rndr->wall->rays[i].x % 64;
+		get_txtr(map, map->rndr->wall->arr_angl[i]);
+		project_wall(map, i, txtr_x);
+		project_floor(map, i);
+		i++;
+	}
+}
+
+t_wall	*cast_v(t_map *map, double ray_angl)
+{
+	t_vector	inters;
+	t_vector	nwall;
+	t_wall		*tmp;
+	t_vector	start;
+
+	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n\tmalloc failed\n", map);
+	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), \
+	"Error:\n\tmalloc failed", map);
+	exit_free_if(!(tmp->step = malloc(sizeof(*tmp->step))), \
+	"Error:\n\tmalloc failed", map);
+	start.x = map->rndr->pvec->x + (PLY_SIZE / 2);
+	start.y = map->rndr->pvec->y + (PLY_SIZE / 2);
+	ray_angl = normalize_ang(ray_angl);
+	inters = get_vert_inters(tmp, ray_angl, start);
+	nwall.x = inters.x;
+	nwall.y = inters.y;
+	if (!ray_is_right(ray_angl))
+		nwall.x -= 1;
+	while (nwall.x >= 0 && nwall.x <= (CELL_SIZE * map->w) && \
+	nwall.y >= 0 && nwall.y <= (CELL_SIZE * map->h))
+		if (check_inters_v(map, &nwall, tmp, ray_angl))
+			break ;
+	if (!map->txtr->found_v)
+		set_biggest_dist(tmp);
+	return (tmp);
+}
+
+t_wall	*cast_h(t_map *map, double ray_angl)
+{
+	t_vector	nwall;
+	t_wall		*tmp;
+	t_vector	start;
+	t_vector	inter;
+
+	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n", map);
+	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), \
+	"Error:\n\tmalloc failed", map);
+	exit_free_if(!(tmp->step = malloc(sizeof(t_wall))), \
+	"Error:\nmalloc failed", map);
+	start.x = map->rndr->pvec->x + (PLY_SIZE / 2);
+	start.y = map->rndr->pvec->y + (PLY_SIZE / 2);
+	ray_angl = normalize_ang(ray_angl);
+	inter = get_horiz_inters(tmp, ray_angl, start);
+	nwall.x = inter.x;
+	nwall.y = inter.y;
+	if (!ray_is_down(ray_angl))
+		nwall.y -= 1;
+	while (nwall.x >= 0 && nwall.x <= (CELL_SIZE * map->w) && \
+	nwall.y >= 0 && nwall.y <= (CELL_SIZE * map->h))
+		if (check_inters_h(map, &nwall, tmp, ray_angl))
+			break ;
+	if (!map->txtr->found_h)
+		set_biggest_dist(tmp);
+	return (tmp);
+}
+
+void	cast(t_map *map, double ray_angl)
+{	
+	t_wall		*wall_h;
+	t_wall		*wall_v;
+
+	wall_h = cast_h(map, ray_angl);
+	wall_v = cast_v(map, ray_angl);
+	get_smaller_dist(map, wall_h, wall_v, ray_angl);
+}
+
+void	cast_rays(t_map *map)
+{
+	double	ray_angl;
+	int		i;
+
+	i = 0;
+	ray_angl = map->rndr->rot_angl - (map->rndr->fov / 2);
+	while (i < WIDTH)
+	{
+		map->txtr->found_v = false;
+		map->txtr->found_h = false;
+		cast(map, ray_angl);
+		if (map->txtr->found_v)
 		{
-			if (map->rndr->wall->vert[p3d.i] == true)
-				map->txtr->data = map->txtr->data_v;
-			else
-				map->txtr->data = map->txtr->data_h;
-			p3d.dist_from_top = p3d.y + (map->rndr->wall->wall_height / 2)
-				- (HEIGHT / 2);
-			p3d.txtr_y = (int)(p3d.dist_from_top * ((float)CELL_SIZE
-						/ (int)map->rndr->wall->wall_height));
-			map->mlx->img_data[(p3d.y * WIDTH + p3d.i)]
-				= map->txtr->data[(p3d.txtr_y * 64 + p3d.txtr_x)];
-			p3d.y++;
+			map->rndr->wall->vert[i] = true;
+			map->rndr->wall->horiz[i] = false;
 		}
-		p3d.y = p3d.botom_pix - 1;
-		while (++p3d.y < HEIGHT)
-			map->mlx->img_data[(p3d.y * WIDTH + p3d.i)] = 0x9b7653;
+		else
+		{
+			map->rndr->wall->vert[i] = false;
+			map->rndr->wall->horiz[i] = true;
+		}
+		ray_angl += (map->rndr->fov / WIDTH);
+		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:20:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 00:17:22 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 11:19:47 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,20 @@ bool	ray_is_down(double angle);
 bool	ray_is_right(double angle);
 double	normalize_ang(double angle);
 void	cast_rays(t_map *map);
+double      denormalize_angle(double angle);
+void        get_txtr(t_map *map, double ray_angl);
+double      get_dist(double x0, double x1, double y0, double y1);
+void	set_biggest_dist(t_wall *wall);
+t_map        *get_smaller_dist(t_map *map, t_wall *wallh, t_wall *wallv, double ray_angl);
+t_vector    get_horiz_inters(t_wall *wall, double ray_ang, t_vector start);
+bool    check_inters_h(t_map *map, t_vector *nwall, t_wall *wall, double ray_ang);
+bool    check_inters_v(t_map *map, t_vector *nwall, t_wall *wall, double ray_ang);
+t_vector    get_vert_inters(t_wall *wall, double ray_angl, t_vector start);
+void    set_biggest_dist(t_wall *wall);
+void    set_wall_info(t_map *map, int i);
+void    project_ceiling(t_map *map, int i);
+void    project_wall(t_map *map, int i, int txtr_x);
+void    project_floor(t_map *map, int i);
 
 // moves
 int		move_player(int key_code, t_map *map);
