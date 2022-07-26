@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 11:11:12 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 16:12:59 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ typedef struct s_darr {
 }			t_darr;
 
 // struct of variables needed in project3d
-typedef    struct    s_3dproj {
-    double        proj_plan;
-    double        wall_proj_height;
-    int            botom_pix;
-    int            top_pix;
-
-} t_3dproj;
+typedef struct s_3dproj {
+	double			proj_plan;
+	double			wall_proj_height;
+	int				botom_pix;
+	int				top_pix;
+}				t_3dproj;
 
 typedef struct s_wall {
 	t_vector	*wall;

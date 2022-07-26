@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:44:21 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/25 20:56:25 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 16:08:11 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@
 // 	}
 // }
 
-void	draw_line(t_map	*map, double angle, int len)
-{
-	double	endx;
-	double	endy;
+// void	draw_line(t_map	*map, double angle, int len)
+// {
+// 	double	endx;
+// 	double	endy;
 
-	endx = (map->rndr->pvec->x + (PLY_SIZE / 2)) + cos(angle) * len;
-	endy = (map->rndr->pvec->y + (PLY_SIZE / 2)) + sin(angle) * len;
-}	
+// 	endx = (map->rndr->pvec->x + (PLY_SIZE / 2)) + cos(angle) * len;
+// 	endy = (map->rndr->pvec->y + (PLY_SIZE / 2)) + sin(angle) * len;
+// }	
