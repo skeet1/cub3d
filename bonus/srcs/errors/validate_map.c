@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 20:20:12 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 23:50:10 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_map	*init(void)
 	map->txtr->west = NULL;
 	map->txtr->north = NULL;
 	map->txtr->south = NULL;
+	map->rndr = NULL;
+	map->mlx = NULL;
 	return (map);
 }
 
@@ -95,7 +97,7 @@ t_map	*get_color(char *line, t_map *map)
 		exit_free_if(!ft_isnumber(rgb[i]), "Error:\n\tinvalid rgb value", map);
 		tmp = ft_atoi(rgb[i]);
 		exit_free_if(tmp < 0 || tmp > 255, "Error:\n\tcolor out of range", map);
-		color += tmp << (i * 8);
+		color += tmp * pow(256, 2 - i);
 	}
 	get_color_assist(map, line[0], color);
 	return (map);

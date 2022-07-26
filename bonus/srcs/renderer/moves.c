@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 18:03:33 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 00:33:48 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ bool	inside_wall(double x, double y, t_map *map)
 		update_pos(&x, &y, map);
 		mvs.index_x = x / CELL_SIZE;
 		mvs.index_y = y / CELL_SIZE;
-		if (map->map[mvs.index_y][mvs.index_x] == '1')
+		if (map->map[mvs.index_y][mvs.index_x] == '1'
+			|| map->map[mvs.index_y][mvs.index_x] == '2')
 			return (true);
 		if (mvs.i == 0)
 			mvs.incx += PLY_SIZE;

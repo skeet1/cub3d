@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 09:13:47 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 16:12:59 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 23:56:28 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include <libft.h>
 # include <stdio.h>
+# include <math.h>
 
 typedef struct s_vector {
 	double	x;

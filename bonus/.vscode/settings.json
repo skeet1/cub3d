@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "__bit_reference": "c",
-        "__string": "c",
-        "algorithm": "c",
-        "ios": "c",
-        "type_traits": "c"
-    }
-}
