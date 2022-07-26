@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:23:56 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/04/27 18:32:25 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 01:54:04 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@ ft_split("*hello*you**ugly*bag**full*of*mostly**water*", ’*’)
 returns the array ["hello", "you", "ugly", "bag", "full","of","mostly", "water"].
 */
 
-
 static int	count_words(const char *str, char c)
 {
-	int i;
-	int trigger;
+	int	i;
+	int	trigger;
 
 	i = 0;
 	trigger = 0;
@@ -55,20 +54,20 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 	int		index;
 	char	**split;
 
-	if (!s || !(split = malloc((count_words(s, c) + 1) * sizeof(char *))))
+	split = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!s || !split)
 		return (0);
-	i = 0;
+	i = -1;
 	j = 0;
 	index = -1;
-	while (i <= ft_strlen(s))
+	while (++i <= ft_strlen(s))
 	{
 		if (s[i] != c && index < 0)
 		{
@@ -79,8 +78,7 @@ char		**ft_split(char const *s, char c)
 			split[j++] = word_dup(s, index, i);
 			index = -1;
 		}
-		i++;
 	}
 	split[j] = 0;
 	return (split);
-}	
+}

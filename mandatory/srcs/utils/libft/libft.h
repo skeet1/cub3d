@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 18:00:55 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/13 23:20:11 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 01:48:10 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ char				*ft_strnstr(const char *haystack, \
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 char				*ft_strstr(const char *heystack, const char *needle);
-
-char				*ft_strtok(char *str, const char *delim);
 bool				ft_isspace(char c);
 int					*ft_stcount(const char *s, char c);
 char				*ft_getnextS(char *s);
@@ -133,7 +131,6 @@ char				*ft_2darr_to_str(char **doub, char *s);
 int					ft_2darr_count(const char **doub, char *to_find);
 char				**ft_doubdup(char **doub);
 char				**ft_2darr_add(char **doub, char *content);
-
 
 /*
 ** FILE DESCRIPTORS MANIPULATION
