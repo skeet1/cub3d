@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lineinsert.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 09:58:06 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/05/15 10:34:43 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 01:55:09 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 		- char *: the modified line
 		- NULL: if the line or content is NULL
 		- NULL: if the start index is greater than the end index
-		- NULL: if the start index or the end index is greater than the length of the line
+		- NULL: if the start index or the end 
+		index is greater than the length of the line
 		- char * old line: if content is empty
 	@Complexity:
 		- oh god, i don't know...
@@ -32,7 +33,8 @@
 		- ft_lineinsert(line, "Bonjour", 0, 5);
 		- line = "Bonjour World";
 	@IMPORTANT:
-		- The function expects char *line && char *content to be dynamically allocated using malloc.
+		- The function expects char *line && 
+		char *content to be dynamically allocated using malloc.
 		
 */
 

@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 16:27:36 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/26 20:20:12 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ t_map	*init(void)
 t_map	*get_texture(char *line, t_map *map)
 {
 	char	*path;
+	char	*hold;
 	int		fd;
 
-	path = ft_substr(line, ft_strchr(line, '/')
+	hold = ft_substr(line, ft_strchr(line, '/')
 			- line - 1, ft_strlen(line) - 1);
-	path = ft_strtrim(path, " ");
+	path = ft_strtrim(hold, " ");
 	exit_free_if((fd = open(path, O_RDONLY)) == -1,
 		"Error:\n\ttexture file not found", map);
 	if (line[0] == 'N' && line[1] == 'O')
@@ -59,6 +60,7 @@ t_map	*get_texture(char *line, t_map *map)
 		map->txtr->east = path;
 	else if (line[0] == 'W' && line[1] == 'E')
 		map->txtr->west = path;
+	free(hold);
 	return (map);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_stcount.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 18:04:41 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/05/04 11:45:15 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 01:53:36 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int	*ft_stcount(const char *s, char c)
 	int	i;
 	int	*arr;
 	int	count;
-	
+
 	count = 0;
 	arr = malloc(sizeof(int) * 2);
 	i = 0;
 	while (s[i] && (s[i] == c || s[i] == ' '))
 	{
-		count = (s[i] == c) ? count + 1 : count;
+		if (s[i] == c)
+			count++;
 		i++;
 	}
 	arr[0] = count;
@@ -37,7 +38,8 @@ int	*ft_stcount(const char *s, char c)
 	i = ft_strlen(s) - 1;
 	while (i >= 0 && (s[i] == c || s[i] == ' '))
 	{
-		count = (s[i] == c) ? count + 1 : count;
+		if (s[i] == c)
+			count++;
 		i--;
 	}
 	arr[1] = count;

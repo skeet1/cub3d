@@ -21,7 +21,6 @@ SRCS = ft_atoi.c \
 		ft_isascii.c \
 		ft_isdigit.c \
 		ft_isprint.c \
-		ft_itoa.c\
 		ft_lstdelone.c \
 		ft_lstnew.c \
 		ft_memchr.c \
@@ -57,7 +56,6 @@ SRCS = ft_atoi.c \
 		ft_strlcpy.c \
 		ft_strstr.c \
 		exitif.c \
-		ft_strtok.c\
 		ft_isspace.c\
 		ft_realloc.c\
 		ft_2darr_trim.c\
@@ -67,7 +65,6 @@ SRCS = ft_atoi.c \
 		ft_doubfree.c\
 		ft_stcount.c\
 		ft_sfree.c\
-		ft_valid_fname.c\
 		ft_ternary.c\
 		ft_intternary.c\
 		ft_getenv.c\
@@ -77,7 +74,6 @@ SRCS = ft_atoi.c \
 		ft_envexp.c\
 		ft_valid_envname.c\
 		ft_2darr_del.c\
-		ft_strsplit.c\
 		ft_doubdup.c\
 		ft_filecpy.c\
 		ft_sisspace.c\

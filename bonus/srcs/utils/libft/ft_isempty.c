@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isempty.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 11:49:15 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/13 11:52:57 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 01:37:20 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 /**
  * @brief check is line is empty 
@@ -20,6 +19,7 @@
  * @return true 
  * @return false 
  */
+
 bool	ft_isempty(char *str)
 {
 	int	i;

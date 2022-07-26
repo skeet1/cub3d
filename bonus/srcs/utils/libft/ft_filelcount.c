@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_filelcount.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:51:04 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/13 19:38:13 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 16:27:51 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /**
  * @breif: count how many lines ina a file
@@ -21,14 +20,18 @@
 
 size_t	ft_filelcount( char	*file)
 {
-	int	fd;
-	size_t	count = 0;
+	int		fd;
+	size_t	count;
 	char	*line;
 
-	if ((fd = open(file, O_RDONLY)) == -1)
+	count = 0;
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 		return (-1);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
+		line = get_next_line(fd);
 		count++;
 		free(line);
 	}

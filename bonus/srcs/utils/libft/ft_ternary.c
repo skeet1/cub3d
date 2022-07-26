@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ternary.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 07:58:10 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/05/06 08:01:46 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 01:44:32 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
  
 */
 
-void *ft_ternary(int condition, void *true_value, void *false_value)
+void	*ft_ternary(int condition, void *true_value, void *false_value)
 {
-    if (condition)
-        return (true_value);
-    else
-        return (false_value);
+	if (condition)
+		return (true_value);
+	else
+		return (false_value);
 }

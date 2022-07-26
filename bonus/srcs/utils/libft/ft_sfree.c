@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_safe_free.c                                     :+:      :+:    :+:   */
+/*   ft_sfree.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 15:57:00 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/05/11 13:22:57 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 01:54:28 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 
 #include "libft.h"
 
-void    ft_sfree(void *ptr)
+void	ft_sfree(void *ptr)
 {
-    if (ptr)
-    {
-        free(ptr);
-        ptr = NULL;
-    }   
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
 }

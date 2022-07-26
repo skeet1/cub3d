@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+         #
+#    By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/24 15:56:34 by ren-nasr          #+#    #+#              #
-#    Updated: 2022/07/24 16:03:57 by ren-nasr         ###   ########.fr        #
+#    Updated: 2022/07/26 22:39:02 by mkarim           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = wolf3d
+NAME = cub3d
 
 BONUS_PATH = ./bonus/
 MNDTR_PATH = ./mandatory/

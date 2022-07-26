@@ -1,4 +1,4 @@
-NAME = wolf3d
+NAME = cub3d
 
 MNDTR_PATH = ./srcs/
 SRCS = $(MNDTR_PATH)/errors/validate_map.c\

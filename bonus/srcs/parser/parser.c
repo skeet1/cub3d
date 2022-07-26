@@ -3,30 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 08:42:07 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/18 14:18:03 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:49:28 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <parser.h>
 #include <renderer.h>
 
-int main( int argc, char **argv )
+int	main( int argc, char **argv)
 {
+	char	*map_file;
+	t_map	*map;
 
-    char *map_file;
-    t_map *map;
-    
-    if (argc < 2)
-    {
-        ft_putendl_fd("Usage: ./wolf3d <map_file>", 2);
-        exit(EXIT_FAILURE);
-    }
-    map_file = argv[1];
-    map = validate_map(map_file);
+	if (argc < 2)
+	{
+		ft_putendl_fd("Usage: ./wolf3d <map_file>", 2);
+		exit(EXIT_FAILURE);
+	}
+	map_file = argv[1];
+	map = validate_map(map_file, argv);
+	play_sound(map);
 	renderer(map);
-	
 	return (0);
 }

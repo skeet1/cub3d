@@ -1,4 +1,4 @@
-NAME = wolf3d
+NAME = cub3d
 
 BONUS_PATH = ./srcs/
 SRCS = $(BONUS_PATH)/errors/validate_map.c\
@@ -13,8 +13,21 @@ SRCS = $(BONUS_PATH)/errors/validate_map.c\
 		$(BONUS_PATH)/renderer/shape_drawers.c\
 		$(BONUS_PATH)/renderer/game_drawers.c\
 		$(BONUS_PATH)/renderer/moves.c\
+		$(BONUS_PATH)/renderer/moves1.c\
 		$(BONUS_PATH)/renderer/casting.c\
-		$(BONUS_PATH)/renderer/utils.c	
+		$(BONUS_PATH)/renderer/cast_calculate.c\
+		$(BONUS_PATH)/renderer/cast_utils.c\
+		$(BONUS_PATH)/renderer/cast_utils2.c\
+		$(BONUS_PATH)/renderer/intersection.c\
+		$(BONUS_PATH)/renderer/prj_calculate.c\
+		$(BONUS_PATH)/renderer/project_3d.c\
+		$(BONUS_PATH)/renderer/utils.c\
+		$(BONUS_PATH)/renderer/animate.c\
+		$(BONUS_PATH)/renderer/animate_utils.c\
+		$(BONUS_PATH)/renderer/sounds.c\
+		$(BONUS_PATH)/errors/validate_map1.c\
+		$(BONUS_PATH)/errors/validate_map2.c
+
 
 RM = rm -rf
 CC = gcc

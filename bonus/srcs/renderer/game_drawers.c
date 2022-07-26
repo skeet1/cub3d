@@ -3,68 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   game_drawers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:43:12 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/23 20:21:59by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/26 22:22:25 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <renderer.h>
-void	draw_rays(t_map *map)
-{
-	size_t		i;
-	i = 0;	
-	while (i < map->rndr->wall->rys_len)
-	{
-		bresenham(map, map->rndr->wall->rays[i].x * SCL_FAC , map->rndr->wall->rays[i].y * SCL_FAC ,  0x03B965);
-		i++;
-	}
-}
 
-void	draw_minimap(t_map	*map)
+void	draw_minimap(t_map *map, double x, double y)
 {
-	size_t	x;
-	size_t	y;
-	int		i;
-	int		j;
-	
-	i = 0;
-	j = 0;
-	x = 0;
-	y = 0;
-	while (map->map[i])
+	t_v		index;
+
+	index.y = -1;
+	while (map->map[++index.y])
 	{
 		x = 0;
-		j = 0;
-		while (map->map[i][j])
+		index.x = -1;
+		while (map->map[index.y][++index.x])
 		{
-			if (map->map[i][j] == '1')
-				draw_square(map, x, y, 0xFF0000, CELL_SIZE * SCL_FAC);
+			if (map->map[index.y][index.x] == '1'
+				|| map->map[index.y][index.x] == '2')
+			{
+				if (map->map[index.y][index.x] == '2')
+					draw_square(map, x, y, 0x00FF00);
+				else if (map->map[index.y][index.x] == '1')
+					draw_square(map, x, y, 0xFF0000);
+			}
 			else
-				draw_square(map, x , y, 0xFFFFFFF, CELL_SIZE  * SCL_FAC);
+				draw_square(map, x, y, 0xFFFFFFF);
 			x += (CELL_SIZE * SCL_FAC);
-			j++;
 		}
-		i++;
 		y += (CELL_SIZE * SCL_FAC);
 	}
-	// draw_rays(map);
-	draw_player(map);
+	draw_player(map, map->rndr->pvec->x, map->rndr->pvec->y);
 }
 
-// }
-
-
-void	draw_player(t_map *map)
+void	draw_player(t_map *map, double x, double y)
 {
 	int		x0;
 	int		y0;
 	double	x1;
 	double	y1;
 
-	x0 = (map->rndr->pvec->x * SCL_FAC);
-	y0 = (map->rndr->pvec->y * SCL_FAC);
+	x0 = (x * SCL_FAC);
+	y0 = (y * SCL_FAC);
 	if (x0 % 8 > 0 && x0 % 8 < 8 && x0 / 8)
 		x0 = (x0 / 8) * 8;
 	if (y0 % 8 > 0 && y0 % 8 < 8 && y0 / 8)
@@ -76,74 +60,54 @@ void	draw_player(t_map *map)
 		y0 = y1;
 		while (y0 < y1 + PLY_SIZE)
 		{
-			put_pix_to_img(map, x0, y0, 0xB0B0B0);
+			put_pix_to_img(map, x0, y0, 0xb0b0b0);
 			y0++;
 		}
 		x0++;
 	}
 }
-		
 
-
-void	init_angl(t_map *map, char c)
+void	draw_map_assistant(t_map *map, t_drawmap *draw)
 {
-	if (c == 'N')
-		map->rndr->rot_angl = degtorad(270);
-	if (c == 'W')
-		map->rndr->rot_angl = degtorad(180);
-	if (c == 'S')
-		map->rndr->rot_angl = degtorad(90);
-	if (c == 'E')
-		map->rndr->rot_angl = degtorad(0);
+	init_angl(map, map->map[draw->i][draw->j]);
+	draw->p = true;
+	map->rndr->pvec->x = draw->x;
+	map->rndr->pvec->y = draw->y;
+	exit_free_if(!(map->rndr->doors->map_cpy = ft_doubdup(map->map)),
+		"Error:\n\tmalloc failed", map);
 }
 
-bool	isplayer(char c)
+void	set_new(t_map *map, bool flag, t_drawmap *draw)
 {
-	if (c == 'N')
-		return (true);
-	if (c == 'E')
-		return (true);
-	if (c == 'S')
-		return (true);
-	if (c == 'W')
-		return (true);
-	return (false);
-}
-
-void	draw_map(t_map *map, int flag) {
-	int	x;
-	int	y;
-	bool	p;
-	p = false;
-	x = 0;  
-	y = 0;
-	for (int i = 0; map->map[i]; i++)
+	if (flag == 1 || draw->p == true)
 	{
-		x = 0;
-		for (int j = 0; map->map[i][j]; j++)
-		{
-			if (isplayer(map->map[i][j]) && !flag)
-			{
-				init_angl(map, map->map[i][j]);
-				p = true;
-				map->rndr->pvec->x = x;
-				map->rndr->pvec->y = y;
-				break;
-			}			
-			x += CELL_SIZE;
-		}
-		y += CELL_SIZE;
-	}
-	if (flag == 1 || p == true)
-	{
-		// draw_player(map);
-		cast_rays(map);	
-		// for (size_t i = 0; i < map->rndr->dist->len; i++)
-		// {
-		// 	printf("dist: %lf\n", map->rndr->dist->arr[i]);
-		// }
+		cast_rays(map, map->map);
 		project3d(map);
-		// draw_minimap(map);
+		draw_minimap(map, 0, 0);
 	}
 }
 
+void	draw_map(t_map *map, int flag)
+{
+	t_drawmap	draw;
+
+	draw.p = false;
+	draw.y = 0;
+	draw.i = -1;
+	while (map->map[++draw.i])
+	{
+		draw.x = 0;
+		draw.j = -1;
+		while (map->map[draw.i][++draw.j])
+		{
+			if (isplayer(map->map[draw.i][draw.j]) && !flag)
+			{
+				draw_map_assistant(map, &draw);
+				break ;
+			}		
+			draw.x += CELL_SIZE;
+		}
+		draw.y += CELL_SIZE;
+	}
+	set_new(map, flag, &draw);
+}
