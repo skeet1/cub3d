@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 10:11:27 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:27:48 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:38:14 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
  * the player height is 32 units (half the cube size) 
  * 
  */
+
+int	red_cross(t_map *map)
+{
+	exit_free_if(true, NULL, map);
+	return (0);
+}
 
 int	key_react(int key_code, t_map *map)
 {
@@ -40,5 +46,6 @@ void	render_map(t_map *map)
 	play_sound(map);
 	mlx_hook(map->mlx->win, MOTION_NOTIFY,
 		1L << 6, mouse_hook, map);
+	mlx_hook(map->mlx->win, 17, 0L, &red_cross, map);
 	mlx_loop(map->mlx->mlx);
 }
