@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 00:33:48 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 10:10:44 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	move_right(t_map *map)
 				+ degtorad(90)) * 4;
 		moves.index_x = (moves.x + moves.incx) / 64;
 		moves.index_y = (moves.y + moves.incy) / 64;
-		if (map->map[moves.index_y][moves.index_x] == '1')
+		if (map->map[moves.index_y][moves.index_x] == '1'
+			|| map->map[moves.index_y][moves.index_x] == '2')
 			return ;
 		if (moves.i == 0)
 			moves.incx += 4;
@@ -96,7 +97,8 @@ void	move_left(t_map *map)
 				- degtorad(90)) * 4;
 		moves.index_x = (moves.x + moves.incx) / 64;
 		moves.index_y = (moves.y + moves.incy) / 64;
-		if (map->map[moves.index_y][moves.index_x] == '1')
+		if (map->map[moves.index_y][moves.index_x] == '1'
+			|| map->map[moves.index_y][moves.index_x] == '2')
 			return ;
 		if (moves.i == 0)
 			moves.incx += 4;
