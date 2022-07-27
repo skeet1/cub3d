@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 19:24:09 by mkarim            #+#    #+#             */
-/*   Updated: 2022/07/25 19:24:51 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:53:08 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	move_player(int key_code, t_map *map)
 {
 	move(map, key_code);
 	if (key_code == EXIT)
-		exit_free_if(true, NULL, NULL);
+		exit_free_if(true, NULL, map, 0);
 	mlx_clear_window(map->mlx->mlx, map->mlx->win);
 	map = new_img(map);
 	draw_map(map, 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:54:32 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:02:20 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 10:21:02 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,21 @@ void	open_door(t_map *map)
 	}
 }
 
+t_v	get_pindex(t_map *map)
+{
+	t_v	index;
+
+	index.x = map->rndr->pvec->x / CELL_SIZE;
+	index.y = map->rndr->pvec->y / CELL_SIZE;
+	return (index);
+}
+
 void	close_door(t_map *map)
 {
 	int		i;
 	double	dist;
 	t_v		index;
+	t_v		pindex;
 
 	i = -1;
 	cast_rays(map, map->rndr->doors->map_cpy);
@@ -71,7 +81,9 @@ void	close_door(t_map *map)
 				map->rndr->wall->rays[i].y, i))
 		{
 			index = get_index(map, i, &dist);
-			if (map->map[index.y][index.x] == '0' && dist < 100)
+			pindex = get_pindex(map);
+			if (map->map[index.y][index.x] == '0' && dist < 100
+			&& index.x != pindex.x && index.y != pindex.x)
 			{
 				map->map[index.y][index.x] = '2';
 				break ;

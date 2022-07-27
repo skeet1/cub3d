@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animate_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 23:14:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:07:05 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:47:34 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	*get_normalized_coord(t_map *map, double x, double y, double ang)
 	int	*coord;
 
 	exit_free_if(!(coord = malloc(sizeof(*coord) * 2)),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	ang = normalize_ang(ang);
 	update_x_y(ang, &x, &y);
 	coord[0] = x;

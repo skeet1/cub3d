@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 00:30:23 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:58:03 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 void	project3d(t_map	*map)
 {
 	int	i;
-	int	y;
 	int	txtr_x;
 
 	i = 0;
-	y = 0;
 	while (i < WIDTH)
 	{
 		set_wall_info(map, i);
@@ -42,11 +40,11 @@ t_wall	*cast_v(t_map *map, double ray_angl)
 	t_wall		*tmp;
 	t_vector	start;
 
-	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n\tmalloc failed\n", map);
+	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Err:\n\tmalloc failed\n", map, 1);
 	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), \
-	"Error:\n\tmalloc failed", map);
+	"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(tmp->step = malloc(sizeof(*tmp->step))), \
-	"Error:\n\tmalloc failed", map);
+	"Error:\n\tmalloc failed", map, 1);
 	start.x = map->rndr->pvec->x + (PLY_SIZE / 2);
 	start.y = map->rndr->pvec->y + (PLY_SIZE / 2);
 	ray_angl = normalize_ang(ray_angl);
@@ -71,11 +69,11 @@ t_wall	*cast_h(t_map *map, double ray_angl)
 	t_vector	start;
 	t_vector	inter;
 
-	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n", map);
+	exit_free_if(!(tmp = malloc(sizeof(*tmp))), "Error:\n", map, 1);
 	exit_free_if(!(tmp->wall = malloc(sizeof(*tmp->wall))), \
-	"Error:\n\tmalloc failed", map);
+	"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(tmp->step = malloc(sizeof(t_wall))), \
-	"Error:\nmalloc failed", map);
+	"Error:\nmalloc failed", map, 1);
 	start.x = map->rndr->pvec->x + (PLY_SIZE / 2);
 	start.y = map->rndr->pvec->y + (PLY_SIZE / 2);
 	ray_angl = normalize_ang(ray_angl);

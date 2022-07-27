@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:09:17 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 10:10:44 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 10:24:07 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ bool	inside_wall(double x, double y, t_map *map)
 		update_pos(&x, &y, map);
 		mvs.index_x = x / CELL_SIZE;
 		mvs.index_y = y / CELL_SIZE;
-		if (map->map[mvs.index_y][mvs.index_x] == '1'
-			|| map->map[mvs.index_y][mvs.index_x] == '2')
+		if (map->map[mvs.index_y][mvs.index_x] == '1' || \
+		map->map[mvs.index_y][mvs.index_x] == '2')
 			return (true);
 		if (mvs.i == 0)
 			mvs.incx += PLY_SIZE;
@@ -98,7 +98,7 @@ void	move_left(t_map *map)
 		moves.index_x = (moves.x + moves.incx) / 64;
 		moves.index_y = (moves.y + moves.incy) / 64;
 		if (map->map[moves.index_y][moves.index_x] == '1'
-			|| map->map[moves.index_y][moves.index_x] == '2')
+		|| map->map[moves.index_y][moves.index_x] == '2')
 			return ;
 		if (moves.i == 0)
 			moves.incx += 4;

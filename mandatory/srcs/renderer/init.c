@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 10:51:31 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 14:42:10 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:57:44 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 void	check_exit_free(t_map *map)
 {
 	exit_free_if(!(map->rndr = malloc(sizeof(*map->rndr))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(map->rndr->pvec = malloc(sizeof(*map->rndr->pvec))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(map->rndr->wall = malloc(sizeof(*map->rndr->wall))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(map->rndr->wall->wall
 			= malloc(sizeof(*map->rndr->wall->wall))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(map->rndr->wall->step
 			= malloc(sizeof(*map->rndr->wall->step))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(map->txtr->north_vec
 			= malloc(sizeof(*map->txtr->north_vec))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(map->rndr->proj
 			= malloc(sizeof(*map->rndr->proj))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 }
 
 t_map	*init_rndr(t_map *map)
@@ -55,7 +55,7 @@ t_map	*init_rndr(t_map *map)
 t_map	*new_img(t_map *map)
 {
 	exit_free_if(!(map->mlx->img = mlx_new_image(map->mlx->mlx,
-				WIDTH, HEIGHT)), "Error:\n\tmlx image creation failed", map);
+				WIDTH, HEIGHT)), "Error:\n\tmlx image creation failed", map, 1);
 	map->mlx->bpp = 32;
 	map->mlx->size_line = WIDTH * 4;
 	map->mlx->endian = 0;
@@ -79,24 +79,24 @@ void	mlx_init_txtr(t_map *map)
 t_map	*init_mlx(t_map	*map)
 {
 	exit_free_if(!(map->mlx = malloc(sizeof(*map->mlx))),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 	exit_free_if(!(map->mlx->mlx = mlx_init()),
-		"Error:\n\tmlx initilization failed", map);
+		"Error:\n\tmlx initilization failed", map, 1);
 	exit_free_if(!(map->mlx->win = mlx_new_window(map->mlx->mlx, WIDTH,
 				HEIGHT, "wolfenstein 3d")),
-		"Error:\n\tmlx window creation failed", map);
+		"Error:\n\tmlx window creation failed", map, 1);
 	exit_free_if(!(map->txtr->img_n = mlx_xpm_file_to_image(map->mlx->mlx,
 				map->txtr->north, &map->txtr->w, &map->txtr->h)),
-		"Error:\n\tmlx image creation failed", map);
+		"Error:\n\tmlx image creation failed", map, 1);
 	exit_free_if(!(map->txtr->img_s = mlx_xpm_file_to_image(map->mlx->mlx,
 				map->txtr->south, &map->txtr->w, &map->txtr->h)),
-		"Error:\n\tmlx image creation failed", map);
+		"Error:\n\tmlx image creation failed", map, 1);
 	exit_free_if(!(map->txtr->img_e = mlx_xpm_file_to_image(map->mlx->mlx,
 				map->txtr->east, &map->txtr->w, &map->txtr->h)),
-		"Error:\n\tmlx image creation failed", map);
+		"Error:\n\tmlx image creation failed", map, 1);
 	exit_free_if(!(map->txtr->img_w = mlx_xpm_file_to_image(map->mlx->mlx,
 				map->txtr->west, &map->txtr->w, &map->txtr->h)),
-		"Error:\n\tmlx image creation failed", map);
+		"Error:\n\tmlx image creation failed", map, 1);
 	mlx_init_txtr(map);
 	map = new_img(map);
 	return (map);

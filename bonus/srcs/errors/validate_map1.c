@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:54:03 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:48:22 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ void	exit_if_assist(char *map_file, int *fd)
 void	is_map_assist(t_map	*map, int fd, char *line)
 {
 	exit_free_if(!ft_strofonly(ft_substr(line, 0, ft_strlen(line) - 1), "1"),
-		"Error:\n\tmap should be surrounded by walls", map);
+		"Error:\n\tmap should be surrounded by walls", map, 1);
 	map->map = malloc(sizeof(char *) * 2);
 	map->map[0] = ft_substr(line, 0, ft_strlen(line) - 1);
 	map->map[1] = NULL;
 	map = get_map(fd, map);
-	exit_free_if(!map, "Error:\n\tInvalid map", map);
+	exit_free_if(!map, "Error:\n\tInvalid map", map, 1);
 	exit_free_if(!ft_strofonly(
 			map->map[ft_2darr_len((const char**) map->map) - 1], "1"),
-		"Error:\n\tmap should be surrounded by walls", map);
+		"Error:\n\tmap should be surrounded by walls", map, 1);
 }
 
 t_map	*validate_map(char *map_file, char **env)

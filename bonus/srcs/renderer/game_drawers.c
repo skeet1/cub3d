@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:43:12 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:22:25 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 10:40:16 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	draw_map_assistant(t_map *map, t_drawmap *draw)
 	map->rndr->pvec->x = draw->x;
 	map->rndr->pvec->y = draw->y;
 	exit_free_if(!(map->rndr->doors->map_cpy = ft_doubdup(map->map)),
-		"Error:\n\tmalloc failed", map);
+		"Error:\n\tmalloc failed", map, 1);
 }
 
 void	set_new(t_map *map, bool flag, t_drawmap *draw)

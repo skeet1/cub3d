@@ -14,12 +14,10 @@
 
 void	draw_player(t_map *map)
 {
-	int		i;
 	double	prev_x;
 	double	x0;
 	double	y0;
 
-	i = 0;
 	x0 = (map->rndr->pvec->x * SCL_FAC);
 	y0 = (map->rndr->pvec->y * SCL_FAC);
 	prev_x = x0 ;

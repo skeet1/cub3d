@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:43:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 23:34:40 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/27 09:43:49 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_rndr(t_map *map)
 	ft_sfree(map->rndr->proj);
 }
 
-void	exit_free_if( int cond, char *msg, t_map *map)
+void	exit_free_if( int cond, char *msg, t_map *map, int code )
 {
 	if (cond)
 	{
@@ -40,6 +40,6 @@ void	exit_free_if( int cond, char *msg, t_map *map)
 		}
 		if (msg)
 			ft_putendl_fd(msg, 2);
-		exit(EXIT_FAILURE);
+		exit(code);
 	}
 }

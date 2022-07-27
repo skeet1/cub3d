@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:44:15 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 22:49:42 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/27 09:43:45 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <parser.h>
 # include <mlx.h>
 
-void	exit_free_if(int cond, char *msg, t_map *map);
+void	exit_free_if(int cond, char *msg, t_map *map, int code);
 t_map	*init(void);
 t_map	*get_texture(char *line, t_map *map);
 void	get_color_assist(t_map *map, char c, int color);

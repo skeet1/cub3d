@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/26 23:59:45 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/27 09:56:19 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_map	*init(void)
 	exitif(!(map = malloc(sizeof(*map))),
 		"Error\n\tmalloc error");
 	exit_free_if(!(map->txtr = malloc(sizeof(*map->txtr))),
-		"Error\n\tmalloc error", map);
+		"Error\n\tmalloc error", map, 1);
 	exit_free_if(!(map->clr = malloc(sizeof(*map->clr))),
-		"Error\n\tmalloc error", map);
+		"Error\n\tmalloc error", map, 1);
 	map->map = NULL;
 	map->txtr->east = NULL;
 	map->txtr->west = NULL;
@@ -53,7 +53,7 @@ t_map	*get_texture(char *line, t_map *map)
 			- line - 1, ft_strlen(line) - 1);
 	path = ft_strtrim(hold, " ");
 	exit_free_if((fd = open(path, O_RDONLY)) == -1,
-		"Error:\n\ttexture file not found", map);
+		"Error:\n\ttexture file not found", map, 1);
 	if (line[0] == 'N' && line[1] == 'O')
 		map->txtr->north = path;
 	else if (line[0] == 'S' && line[1] == 'O')
@@ -89,14 +89,14 @@ t_map	*get_color(char *line, t_map *map)
 	while (ft_isspace(line[i]))
 		i++;
 	rgb = ft_split(&line[i], ',');
-	exit_free_if(!rgb, "Error:\n\tft_split failed", map);
+	exit_free_if(!rgb, "Error:\n\tft_split failed", map, 1);
 	i = -1;
 	while (rgb[++i])
 	{		
 		rgb[i] = ft_strtrim(rgb[i], "\n");
-		exit_free_if(!ft_isnumber(rgb[i]), "Error:\n\tinvalid rgb value", map);
+		exit_free_if(!ft_isnumber(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		tmp = ft_atoi(rgb[i]);
-		exit_free_if(tmp < 0 || tmp > 255, "Error:\n\tcolor out of range", map);
+		exit_free_if(tmp < 0 || tmp > 255, "Err:\n\tcolor out of range", map, 1);
 		color += tmp * pow(256, 2 - i);
 	}
 	get_color_assist(map, line[0], color);
