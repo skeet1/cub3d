@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_free_if.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:43:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 09:43:49 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:39:37 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@
 void	free_rndr(t_map *map)
 {
 	ft_sfree(map->rndr->pvec);
+	ft_sfree(map->rndr->wall->wall);
 	ft_sfree(map->rndr->wall);
 	ft_sfree(map->rndr->proj);
+	ft_sfree(map->rndr->doors->door_data);
+	ft_sfree(map->rndr->doors->map_cpy);
+	ft_sfree(map->rndr->doors);
+	ft_sfree(map->rndr);
 }
 
 void	exit_free_if( int cond, char *msg, t_map *map, int code )
@@ -40,6 +45,7 @@ void	exit_free_if( int cond, char *msg, t_map *map, int code )
 		}
 		if (msg)
 			ft_putendl_fd(msg, 2);
+		system("leaks cub3d");
 		exit(code);
 	}
 }
