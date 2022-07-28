@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 09:56:19 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/28 11:24:44 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ bool	map_is_last(char *map_file)
 	while (ft_isempty(lines[len - 1]))
 		len--;
 	if (!is_map(lines[len - 1]))
-		return (false);
-	return (true);
+		return (free(lines), false);
+	return (free(lines), true);
 }

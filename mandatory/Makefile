@@ -28,10 +28,10 @@ SRCS = $(MNDTR_PATH)/errors/validate_map.c\
 RM = rm -rf
 CC = gcc
 #CFLAGS = -Wall -Wextra -Werror -g  -mmacosx-version-min=10.15 -arch arm64
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror -g
 OBJS = $(SRCS:.c=.o)
 INCS = -I$(MNDTR_PATH)/includes/ -I./srcs/utils/libft/
-INCLDS = $(MNDTR_PATH)/includes/parser.h $(MNDTR_PATH)/includes/errors.h $(MNDTR_PATH)/includes/renderer.h 
+INCLDS = $(MNDTR_PATH)/includes/parser.h $(MNDTR_PATH)/includes/errors.h $(MNDTR_PATH)/includes/renderer.h
 LIBFT_PATH = ./srcs/utils/libft/
 MINLBX_PATH = ./srcs/utils/minilibx/
 
