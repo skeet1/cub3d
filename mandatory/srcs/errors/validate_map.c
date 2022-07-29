@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 21:35:25 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 21:59:09 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ t_map	*get_color(char *line, t_map *map)
 		exit_free_if(ft_isempty(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		if (rgb[i][ft_strlen(rgb[i]) - 1] == '\n')
 			rgb[i][ft_strlen(rgb[i]) - 1] = '\0';
-		rgb[i] = ft_strtrim(rgb[i], " ");
 		exit_free_if(!ft_isnumber(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		tmp = ft_atoi(rgb[i]);
 		exit_free_if(tmp < 0 || tmp > 255, "Err:\n\tcolor out of range", map, 1);
