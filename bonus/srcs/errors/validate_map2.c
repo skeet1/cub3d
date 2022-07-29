@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 11:51:38 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 23:00:16 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	get_map_assist(t_map *map, char *line, int *height, bool prev_isempty)
 		"Error:\n\tmap should be be seperated by empty lines", map, 1);
 	if (!prev_isempty)
 	{	
-
 		map->map = ft_2darr_add(map->map, line);
 		(*height)++;
 	}
@@ -46,9 +45,7 @@ t_map	*get_map(int fd, t_map *map)
 	char	*line;
 	bool	prev_isempty;
 	int		height;
-	int		i;
 
-	i = 0;
 	line = get_next_line(fd);
 	prev_isempty = false;
 	height = 1;
@@ -64,7 +61,7 @@ t_map	*get_map(int fd, t_map *map)
 		}
 		if (get_map_assist(map, line, &height, prev_isempty))
 			return (NULL);
-		// ft_sfree(line);
+		ft_sfree(line);
 		line = get_next_line(fd);
 	}
 	map->h = height;

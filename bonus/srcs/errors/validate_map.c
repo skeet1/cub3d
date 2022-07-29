@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 12:02:10 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 22:55:20 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ t_map	*get_texture(char *line, t_map *map)
 	return (map);
 }
 
-void	get_color_assist(t_map *map, char c, int color)
+void	init_and_scape_spc(char *line, int *i, int *color)
 {
-	if (c == 'F')
-		map->clr->floor = color;
-	else if (c == 'C')
-		map->clr->ceiling = color;
-	map->clr_txtr_count.x += 1;
+	*color = 0;
+	*i = 0;
+	while (line[*i] != 'F' && line[*i] != 'C')
+		(*i)++;
+	(*i) += 1;
+	while (ft_isspace(line[*i]))
+		(*i)++;
 }
 
 t_map	*get_color(char *line, t_map *map)
@@ -87,17 +89,12 @@ t_map	*get_color(char *line, t_map *map)
 	int		color;
 	int		tmp;
 	int		i;
+	char	**temp;
 
-	color = 0;
-	i = 0;
-	while (line[i] != 'F' && line[i] != 'C')
-		i++;
-	i += 1;
-	while (ft_isspace(line[i]))
-		i++;
-	rgb = ft_split(&line[i], ',');
-	exit_free_if(!rgb, "Error:\n\tft_split failed", map, 1);
-	rgb = ft_2darr_trim(rgb, " ");
+	init_and_scape_spc(line, &i, &color);
+	temp = ft_split(&line[i], ',');
+	exit_free_if(!temp, "Error:\n\tft_split failed", map, 1);
+	rgb = ft_2darr_trim(temp, " ");
 	exit_free_if(ft_2darr_len((const char **)rgb) != 3,
 		"Error\n\tcolor format error", map, 1);
 	i = -1;
@@ -106,15 +103,13 @@ t_map	*get_color(char *line, t_map *map)
 		exit_free_if(ft_isempty(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		if (rgb[i][ft_strlen(rgb[i]) - 1] == '\n')
 			rgb[i][ft_strlen(rgb[i]) - 1] = '\0';
-		rgb[i] = ft_strtrim(rgb[i], " ");
 		exit_free_if(!ft_isnumber(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		tmp = ft_atoi(rgb[i]);
 		exit_free_if(tmp < 0 || tmp > 255, "Err:\n\tcolor out of range", map, 1);
-		printf("clr: %d\n", tmp);
 		color += tmp * pow(256, 2 - i);
 	}
 	get_color_assist(map, line[0], color);
-	return (map);
+	return (ft_doubfree((void **)rgb, 0), map);
 }
 
 bool	map_is_last(char *map_file)

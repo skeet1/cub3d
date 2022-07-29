@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 01:14:14 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 12:17:00 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 23:10:21 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,18 @@ bool	check_plyr(char **map, int i, int j)
 	return (true);
 }
 
+void	free_and_gnl(char **line, int fd)
+{
+	free(*line);
+	*line = get_next_line(fd);
+}
+
 char	*check_line_get_mp(char *line)
 {
 	char	*trim;
 	size_t	len;
 	int		count;
-	int	i;
+	int		i;
 
 	count = 0;
 	trim = line;
@@ -47,7 +53,6 @@ char	*check_line_get_mp(char *line)
 		if (ft_isspace(trim[i]))
 		{
 			trim[i] = '1';
-			// count += 1;
 		}
 		i++;
 	}

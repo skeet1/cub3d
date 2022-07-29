@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_free_if.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:43:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 12:01:02 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 22:40:24 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	exit_free_if( int cond, char *msg, t_map *map, int code )
 	{
 		if (map)
 		{
-			// if (map->rndr)
-			// 	kill(map->rndr->music, SIGKILL);
+			if (map->rndr)
+				kill(map->rndr->music, SIGKILL);
 			if (map->map)
 				ft_doubfree((void **)map->map, \
 					ft_2darr_len((const char **)map->map));
@@ -38,7 +38,6 @@ void	exit_free_if( int cond, char *msg, t_map *map, int code )
 			if (map->mlx)
 				mlx_destroy_window(map->mlx->mlx, map->mlx->win);
 		}
-		// system("leaks cub3d");
 		if (msg)
 			ft_putendl_fd(msg, 2);
 		exit(code);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:35:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 11:49:05 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 22:41:10 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ char	*check_line(char *line)
 	int		count;
 
 	count = 0;
-
 	if (ft_isspace(line[0]))
 	{
 		trim = ft_strtrim(line, " ");
