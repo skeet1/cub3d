@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/28 11:22:29 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 11:31:25 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,13 @@ void	exit_if_assist(char *map_file, int *fd)
 
 void	is_map_assist(t_map	*map, int fd, char *line)
 {
-	char	*hold;
-
-	hold = ft_substr(line, 0, ft_strlen(line) - 1);
-	exit_free_if(!ft_strofonly(hold, "1"),
-		"Error:\n\tmap should be surrounded by walls", map, 1);
-	free(hold);
+	line = check_line(line);
+	// exit_free_if(!(line = ft_strtrim(line, " ")), "Error:\n\tmalloc failed", map, 1);
 	map->map = malloc(sizeof(char *) * 2);
-	hold = ft_substr(line, 0, ft_strlen(line) - 1);
-	map->map[0] = hold;
+	map->map[0] = line;
 	map->map[1] = NULL;
 	map = get_map(fd, map);
 	exit_free_if(!map, "Error:\n\tInvalid map", map, 1);
-	exit_free_if(!ft_strofonly(
-			map->map[ft_2darr_len((const char**) map->map) - 1], "1"),
-		"Error:\n\tmap should be surrounded by walls", map, 1);
 }
 
 t_map	*validate_map(char *map_file)
@@ -72,11 +64,14 @@ t_map	*validate_map(char *map_file)
 	exit_if_assist(map_file, &fd);
 	line = get_next_line(fd);
 	map = init();
+	map->map = ft_file_to_2darr(map_file);
+	map->map = get_new_map(map->map);
+	exit_free_if(!check_map(map->map), "Error:\n\tinvalid map", map, 1);
 	while (line != NULL)
 	{
 		if (ft_isempty(line))
 		{
-			free(line);
+			ft_sfree(line);
 			line = get_next_line(fd);
 			continue ;
 		}
@@ -86,8 +81,10 @@ t_map	*validate_map(char *map_file)
 			is_map_assist(map, fd, line);
 			break ;
 		}
-		free(line);
+		ft_sfree(line);
 		line = get_next_line(fd);
 	}
+	exit_free_if(map->clr_txtr_count.x != 2 || \
+	map->clr_txtr_count.y != 4, "Error:\n\t invalid arguments in map", map, 1);
 	return (close(fd), map);
 }

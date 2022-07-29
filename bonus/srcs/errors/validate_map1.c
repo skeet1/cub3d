@@ -6,7 +6,7 @@
 /*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 09:48:22 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 01:38:19 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,13 @@ void	exit_if_assist(char *map_file, int *fd)
 
 void	is_map_assist(t_map	*map, int fd, char *line)
 {
-	exit_free_if(!ft_strofonly(ft_substr(line, 0, ft_strlen(line) - 1), "1"),
-		"Error:\n\tmap should be surrounded by walls", map, 1);
+	line = check_line(line);
+	exit_free_if(!(line = ft_strtrim(line, " ")), "Error:\n\tmalloc failed", map, 1);
 	map->map = malloc(sizeof(char *) * 2);
-	map->map[0] = ft_substr(line, 0, ft_strlen(line) - 1);
+	map->map[0] = line;
 	map->map[1] = NULL;
 	map = get_map(fd, map);
 	exit_free_if(!map, "Error:\n\tInvalid map", map, 1);
-	exit_free_if(!ft_strofonly(
-			map->map[ft_2darr_len((const char**) map->map) - 1], "1"),
-		"Error:\n\tmap should be surrounded by walls", map, 1);
 }
 
 t_map	*validate_map(char *map_file, char **env)
@@ -68,6 +65,9 @@ t_map	*validate_map(char *map_file, char **env)
 	line = get_next_line(fd);
 	map = init();
 	map->env = ft_doubdup(env);
+	map->map = ft_file_to_2darr(map_file);
+	map->map = get_new_map(map->map);
+	exit_free_if(!check_map(map->map), "Error:\n\tinvalid map", map, 1);
 	while (line != NULL)
 	{
 		if (ft_isempty(line))
@@ -84,5 +84,7 @@ t_map	*validate_map(char *map_file, char **env)
 		free(line);
 		line = get_next_line(fd);
 	}
+	exit_free_if(map->clr_txtr_count.x != 2 || \
+	map->clr_txtr_count.y != 4, "Error:\n\t invalid arguments in map", map, 1);
 	return (close(fd), map);
 }

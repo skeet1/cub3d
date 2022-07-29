@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 22:54:32 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/28 15:08:20 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/28 15:41:17 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	close_door(t_map *map)
 			index = get_index(map, i, &dist);
 			pindex = get_pindex(map);
 			if (map->map[index.y][index.x] == '0' && dist < 100
-			&& index.x != pindex.x && index.y != pindex.y)
+			&& dist > 30)
 			{
 				map->map[index.y][index.x] = '2';
 				break ;

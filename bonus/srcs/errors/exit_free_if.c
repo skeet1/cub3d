@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_free_if.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:43:52 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/28 15:06:04 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 12:01:02 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,8 @@
 void	free_rndr(t_map *map)
 {
 	ft_sfree(map->rndr->pvec);
-	ft_sfree(map->rndr->wall->wall);
 	ft_sfree(map->rndr->wall);
 	ft_sfree(map->rndr->proj);
-	ft_sfree(map->rndr->doors->door_data);
-	ft_sfree(map->rndr->doors->map_cpy);
-	ft_sfree(map->rndr->doors);
-	ft_sfree(map->rndr);
 }
 
 void	exit_free_if( int cond, char *msg, t_map *map, int code )
@@ -31,8 +26,8 @@ void	exit_free_if( int cond, char *msg, t_map *map, int code )
 	{
 		if (map)
 		{
-			if (map->rndr)
-				kill(map->rndr->music, SIGKILL);
+			// if (map->rndr)
+			// 	kill(map->rndr->music, SIGKILL);
 			if (map->map)
 				ft_doubfree((void **)map->map, \
 					ft_2darr_len((const char **)map->map));
@@ -43,9 +38,9 @@ void	exit_free_if( int cond, char *msg, t_map *map, int code )
 			if (map->mlx)
 				mlx_destroy_window(map->mlx->mlx, map->mlx->win);
 		}
+		// system("leaks cub3d");
 		if (msg)
 			ft_putendl_fd(msg, 2);
-		system("leaks cub3d");
 		exit(code);
 	}
 }

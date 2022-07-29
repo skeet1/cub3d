@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:44:15 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/27 11:11:19 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 11:55:16 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,18 @@ void	is_map_assist(t_map	*map, int fd, char *line);
 t_map	*validate_map(char *map_file, char **env);
 int		get_map_assist(t_map *map, char *line, int *height, bool prev_isempty);
 t_map	*get_map(int fd, t_map *map);
+bool	is_txtr(char c);
+char	*check_line(char *line);
+char	**get_new_map(char **map);
+bool	check_map(char **map);
+void	skip_spcs(char **map, int *i);
+char	*add_spaces(char *line, size_t maxlen);
+size_t	get_max(char **map);
+bool	all_ones(char *line);
+bool	check_plyr(char **map, int i, int j);
+bool	is_plyr(char c);
+bool	valid(char **line, int i, int j);
+char	*check_line(char *line);
+char	*check_line_get_mp(char *line);
 
 #endif
