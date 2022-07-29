@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 21:01:55 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 21:36:41 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	check_is_indetifier(t_map *map, char *line)
 			map = get_texture(line, map);
 		else
 		{
-			map = get_color(line, map);
+			map = get_color(line, map);	
 		}
 		
 	}
@@ -89,6 +89,8 @@ t_map	*validate_map(char *map_file)
 		ft_sfree(line);
 		line = get_next_line(fd);
 	}
+	// system("leaks cub3d");
+	// exit (0);
 	exit_free_if(map->clr_txtr_count.x != 2 || \
 	map->clr_txtr_count.y != 4, "Error:\n\t invalid arguments in map", map, 1);
 	return (close(fd), map);
