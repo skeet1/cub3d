@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 20:24:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/28 11:57:50 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 21:09:51 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	cast(t_map *map, double ray_angl)
 {	
 	t_wall		*wall_h;
 	t_wall		*wall_v;
-
 	wall_h = cast_h(map, ray_angl);
 	wall_v = cast_v(map, ray_angl);
 	get_smaller_dist(map, wall_h, wall_v, ray_angl);

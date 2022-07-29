@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 23:43:53 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/25 19:10:47 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 21:16:28 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ t_map	*add_dist(t_map *map, double value, double ray_angle)
 {
 	size_t	i;
 
-	if (map->rndr->wall->len_arr == WIDTH)
+	if (map->rndr->wall->len_arr < WIDTH)
 		map->rndr->wall->len_arr = 0;
 	i = map->rndr->wall->len_arr - 1;
+				system("leaks cub3d");
 	map->rndr->wall->arr_dist[i] = value;
+				system("leaks cub3d");
+		exit (0);
 	map->rndr->wall->arr_angl[i] = ray_angle;
 	map->rndr->wall->len_arr += 1;
 	return (map);

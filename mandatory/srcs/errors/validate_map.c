@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 20:46:49 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 21:01:04 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ void	get_color_assist(t_map *map, char c, int color)
 t_map	*get_color(char *line, t_map *map)
 {
 	char	**rgb;
+	char	**hold;
 	int		color;
 	int		tmp;
 	int		i;
-	char	**temp;
 
 	color = 0;
 	i = 0;
@@ -96,10 +96,9 @@ t_map	*get_color(char *line, t_map *map)
 	i += 1;
 	while (ft_isspace(line[i]))
 		i++;
-	temp = ft_split(&line[i], ',');
-	exit_free_if(!temp, "Error:\n\tft_split failed", map, 1);
-	rgb = ft_2darr_trim(temp, " ");
-	ft_doubfree((void **)temp, 0);
+	hold = ft_split(&line[i], ',');
+	exit_free_if(!hold, "Error:\n\tft_split failed", map, 1);
+	rgb = ft_2darr_trim(hold, " ");
 	exit_free_if(ft_2darr_len((const char **)rgb) != 3,
 		"Error\n\tcolor format error", map, 1);
 	i = -1;
@@ -108,14 +107,11 @@ t_map	*get_color(char *line, t_map *map)
 		exit_free_if(ft_isempty(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		if (rgb[i][ft_strlen(rgb[i]) - 1] == '\n')
 			rgb[i][ft_strlen(rgb[i]) - 1] = '\0';
-		rgb[i] = ft_strtrim(rgb[i], " ");
 		exit_free_if(!ft_isnumber(rgb[i]), "Error:\n\tinvalid rgb value", map, 1);
 		tmp = ft_atoi(rgb[i]);
 		exit_free_if(tmp < 0 || tmp > 255, "Err:\n\tcolor out of range", map, 1);
 		color += tmp * pow(256, 2 - i);
 	}
-	// system("leaks cub3d");
-	// exit (0);
 	get_color_assist(map, line[0], color);
 	ft_doubfree((void **)rgb, 0);
 	return (map);

@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 11:52:11 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 18:25:57 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 20:52:40 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	**ft_2darr_trim(char **doub, char *set)
 	{
 		if (ft_strnstr(doub[i], set, ft_strlen(doub[i])))
 		{
-			hold = ft_strtrim(doub[i], set);
-			doub[i] = hold;
+			hold = doub[i];
+			doub[i] = ft_strtrim(doub[i], set);
 			ft_sfree(hold);
 		}
 		i++;
