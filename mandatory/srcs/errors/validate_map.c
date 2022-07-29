@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 01:02:07 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 18:28:43 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	get_color_assist(t_map *map, char c, int color)
 t_map	*get_color(char *line, t_map *map)
 {
 	char	**rgb;
+	char	**hold;
 	int		color;
 	int		tmp;
 	int		i;
@@ -95,11 +96,12 @@ t_map	*get_color(char *line, t_map *map)
 	i += 1;
 	while (ft_isspace(line[i]))
 		i++;
-	rgb = ft_split(&line[i], ',');
-	exit_free_if(!rgb, "Error:\n\tft_split failed", map, 1);
-	rgb = ft_2darr_trim(rgb, " ");
+	hold = ft_split(&line[i], ',');
+	exit_free_if(!hold, "Error:\n\tft_split failed", map, 1);
+	rgb = ft_2darr_trim(hold, " ");
 	exit_free_if(ft_2darr_len((const char **)rgb) != 3,
 		"Error\n\tcolor format error", map, 1);
+	// ft_doubfree((void **)hold, 0);
 	i = -1;
 	while (rgb[++i])
 	{
@@ -112,7 +114,14 @@ t_map	*get_color(char *line, t_map *map)
 		exit_free_if(tmp < 0 || tmp > 255, "Err:\n\tcolor out of range", map, 1);
 		color += tmp * pow(256, 2 - i);
 	}
+	// printf("%p\n", hold[0]);
+	// printf("%p\n", hold[1]);
+	// free(hold[0]);
+	// free(hold[1]);
+	// system("leaks cub3d");
+	// exit(0);
 	get_color_assist(map, line[0], color);
+	ft_doubfree((void **)rgb, 0);
 	return (map);
 }
 
@@ -128,9 +137,9 @@ bool	map_is_last(char *map_file)
 		len--;
 	if (!is_map(lines[len - 1]))
 	{
-		ft_doubfree((void **)lines, ft_2darr_len((const char **)lines));
+		ft_doubfree((void **)lines, 0);
 		return (false);
 	}
-	ft_doubfree((void **)lines, ft_2darr_len((const char **)lines));
+	ft_doubfree((void **)lines, 0);
 	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 00:26:13 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 11:07:36 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 18:39:47 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**get_new_map(char **map)
 	skip_spcs(map, &i);
 	maxlen = get_max(map);
 	new = ft_doubdup(&map[i]);
-	ft_doubfree((void **)map, ft_2darr_len((const char **)map));
+	ft_doubfree((void **)map, 0);
 	i = 0;
 	while (new[i])
 	{

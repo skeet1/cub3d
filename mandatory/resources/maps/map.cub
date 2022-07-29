@@ -4,7 +4,7 @@ NO ./resources/textures/stone1.xpm
 WE ./resources/textures/stone2.xpm
 EA ./resources/textures/wall.xpm
 
-F 105,105,105
+F 105,106,107
 C 135,206,235
 
 11111111111111111111111

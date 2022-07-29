@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 12:18:05 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 18:39:02 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_map	*get_map(int fd, t_map *map)
 		}
 		if (get_map_assist(map, line, &height, prev_isempty))
 			return (NULL);
-		// ft_sfree(line);
+		ft_sfree(line);
 		line = get_next_line(fd);
 	}
 	map->h = height;

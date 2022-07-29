@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 11:31:25 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/29 18:49:37 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ t_map	*validate_map(char *map_file)
 	char		*line;
 	int			fd;
 	t_map		*map;
+	char		**hold;
 
 	exit_if_assist(map_file, &fd);
 	line = get_next_line(fd);
 	map = init();
-	map->map = ft_file_to_2darr(map_file);
-	map->map = get_new_map(map->map);
+	hold = ft_file_to_2darr(map_file);
+	map->map = get_new_map(hold);
+	printf("%p\n", map->map[0]);
 	exit_free_if(!check_map(map->map), "Error:\n\tinvalid map", map, 1);
 	while (line != NULL)
 	{
