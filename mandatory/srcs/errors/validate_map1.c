@@ -6,7 +6,7 @@
 /*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 18:49:37 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 20:42:24 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	check_is_indetifier(t_map *map, char *line)
 		if (ft_strchr(line, '/'))
 			map = get_texture(line, map);
 		else
-			map = get_color(line, map);
+		{
+			map = get_color(line, map);	
+		}
+		
 	}
 }
 
@@ -48,6 +51,7 @@ void	is_map_assist(t_map	*map, int fd, char *line)
 {
 	line = check_line(line);
 	// exit_free_if(!(line = ft_strtrim(line, " ")), "Error:\n\tmalloc failed", map, 1);
+	ft_doubfree((void **)map->map, 0);
 	map->map = malloc(sizeof(char *) * 2);
 	map->map[0] = line;
 	map->map[1] = NULL;
@@ -67,7 +71,6 @@ t_map	*validate_map(char *map_file)
 	map = init();
 	hold = ft_file_to_2darr(map_file);
 	map->map = get_new_map(hold);
-	printf("%p\n", map->map[0]);
 	exit_free_if(!check_map(map->map), "Error:\n\tinvalid map", map, 1);
 	while (line != NULL)
 	{
