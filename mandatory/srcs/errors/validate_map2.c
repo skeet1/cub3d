@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 18:39:02 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 23:31:52 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,8 @@ t_map	*get_map(int fd, t_map *map)
 	while (line)
 	{
 		line = check_line_get_mp(line);
-		if (ft_isempty(line))
-		{
-			prev_isempty = true;
-			ft_sfree(line);
-			line = get_next_line(fd);
+		if (isempty_get_map(&line, fd, &prev_isempty))
 			continue ;
-		}
 		if (get_map_assist(map, line, &height, prev_isempty))
 			return (NULL);
 		ft_sfree(line);

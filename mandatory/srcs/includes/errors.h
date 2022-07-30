@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:44:15 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 12:17:35 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 23:32:27 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ bool	check_plyr(char **map, int i, int j);
 bool	is_plyr(char c);
 char	*check_line(char *line);
 char	*check_line_get_mp(char *line);
-
+char	**get_rgb(char *line, char **temp, t_map *map);
+t_map	*map_init(t_map *map, char *map_file);
+bool	empty_line(char **line, int fd);
+bool	isempty_get_map(char **line, int fd, bool *prev_isempty);
 #endif

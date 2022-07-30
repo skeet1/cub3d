@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 21:58:36 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 23:32:12 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
  * check validity of path to texture, done
  * if there's not sixth values return an error, done
 **/
+bool	isempty_get_map(char **line, int fd, bool *prev_isempty)
+{
+	if (ft_isempty(*line))
+	{
+		*prev_isempty = true;
+		ft_sfree(*line);
+		*line = get_next_line(fd);
+		return (true);
+	}
+	return (false);
+}
 
 void	check_is_indetifier(t_map *map, char *line)
 {
@@ -30,10 +41,7 @@ void	check_is_indetifier(t_map *map, char *line)
 		if (ft_strchr(line, '/'))
 			map = get_texture(line, map);
 		else
-		{
 			map = get_color(line, map);
-		}
-		
 	}
 }
 
@@ -50,7 +58,6 @@ void	exit_if_assist(char *map_file, int *fd)
 void	is_map_assist(t_map	*map, int fd, char *line)
 {
 	line = check_line(line);
-	// exit_free_if(!(line = ft_strtrim(line, " ")), "Error:\n\tmalloc failed", map, 1);
 	ft_doubfree((void **)map->map, 0);
 	map->map = malloc(sizeof(char *) * 2);
 	map->map[0] = line;
@@ -64,22 +71,15 @@ t_map	*validate_map(char *map_file)
 	char		*line;
 	int			fd;
 	t_map		*map;
-	char		**hold;
 
+	map = NULL;
 	exit_if_assist(map_file, &fd);
 	line = get_next_line(fd);
-	map = init();
-	hold = ft_file_to_2darr(map_file);
-	map->map = get_new_map(hold);
-	exit_free_if(!check_map(map->map), "Error:\n\tinvalid map", map, 1);
+	map = map_init(map, map_file);
 	while (line != NULL)
 	{
-		if (ft_isempty(line))
-		{
-			ft_sfree(line);
-			line = get_next_line(fd);
+		if (empty_line(&line, fd))
 			continue ;
-		}
 		check_is_indetifier(map, line);
 		if (is_map(line))
 		{

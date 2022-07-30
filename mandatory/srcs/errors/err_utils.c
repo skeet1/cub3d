@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 00:26:13 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 18:39:47 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 22:35:05 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ bool	all_ones(char *line)
 	{
 		if (trim[i] != '1')
 		{
-			return (false);
 			ft_sfree(trim);
+			return (false);
 		}
 		i++;
 	}

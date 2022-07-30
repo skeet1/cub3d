@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 11:59:26 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 21:59:09 by mkarim           ###   ########.fr       */
+/*   Updated: 2022/07/29 23:20:45 by ren-nasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,8 @@ t_map	*get_color(char *line, t_map *map)
 	char	**temp;
 
 	color = 0;
-	i = 0;
-	while (line[i] != 'F' && line[i] != 'C')
-		i++;
-	i += 1;
-	while (ft_isspace(line[i]))
-		i++;
-	temp = ft_split(&line[i], ',');
-	exit_free_if(!temp, "Error:\n\tft_split failed", map, 1);
-	rgb = ft_2darr_trim(temp, " ");
-	// ft_doubfree((void **)temp, 0);
-	exit_free_if(ft_2darr_len((const char **)rgb) != 3,
-		"Error\n\tcolor format error", map, 1);
+	temp = NULL;
+	rgb = get_rgb(line, temp, map);
 	i = -1;
 	while (rgb[++i])
 	{
