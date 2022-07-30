@@ -1,4 +1,4 @@
-MAKEFLAGS += --silent
+# MAKEFLAGS += --silent
 
 NAME = cub3d
 
