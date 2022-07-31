@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ren-nasr <ren-nasr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkarim <mkarim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 11:35:51 by ren-nasr          #+#    #+#             */
-/*   Updated: 2022/07/29 23:09:07 by ren-nasr         ###   ########.fr       */
+/*   Updated: 2022/07/31 10:29:58 by mkarim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ char	*check_line(char *line)
 		trim[len - 1] = '\0';
 		count += 1;
 	}
-	if (count == 2)
-		ft_sfree(trim);
 	return (trim);
 }
 
